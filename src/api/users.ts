@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express'
-import { User} from '../db/entity';
+import { User } from '../db/entities/user.entity';
 import { dataSource } from '../db/dataSource';
 import { Get, Post } from '@decorators/express';
 
@@ -27,6 +27,16 @@ usersRouter.post("/users", async function(req: Request, resp: Response) {
     const user = await dataSource.getRepository(User).create(req.body as User);
     const results = await dataSource.getRepository(User).save(user);
     resp.json(results)
+    /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Add new user',
+            schema: {
+                $email: 'example@mail.ru',
+                $password: 'fkndjfbnvsdb',
+                $username: 'user123',
+                $role: 0
+            }
+    } */
 })
 
 usersRouter.put("/users/:id", async function (req: Request, resp: Response) {

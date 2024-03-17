@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express'
-import { Rule} from '../db/entity';
+import { Rule } from '../db/entities/rule.entity';
 import { dataSource } from '../db/dataSource';
 import { Get, Post } from '@decorators/express';
 
@@ -27,6 +27,17 @@ rulesRouter.post("/rules", async function(req: Request, resp: Response) {
     const rule = await dataSource.getRepository(Rule).create(req.body);
     const results = await dataSource.getRepository(Rule).save(rule);
     resp.json(results)
+    /*  
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Add new rule',
+            required: true,
+            schema: {
+                $title: 'Лайк',
+                $description: 'Пользователь может лайкать понравившиеся задачи',
+            }
+        }
+    } */
 })
 
 rulesRouter.put("/rules/:id", async function (req: Request, resp: Response) {

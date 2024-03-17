@@ -1,9 +1,14 @@
 import express, { Express, Request, Response } from 'express'
-import { Role} from '../db/entity';
+import { Role } from '../db/entities/role.entity';
 import { dataSource } from '../db/dataSource';
 import { Get, Post } from '@decorators/express';
 
+
+import bodyParser from 'body-parser'
+
 export const rolesRouter = express.Router();
+
+const jsonParser = bodyParser.json()
 
 rolesRouter.get('/roles', async function(req: Request, resp: Response) {
     const roles = await dataSource.getRepository(Role).find();
@@ -24,9 +29,21 @@ rolesRouter.get('/roles/:id', async function(req: Request, resp: Response) {
 })
 
 rolesRouter.post("/roles", async function(req: Request, resp: Response) {
+    console.log("BODY ", req.body)
     const role = await dataSource.getRepository(Role).create(req.body);
     const results = await dataSource.getRepository(Role).save(role);
     resp.json(results)
+    /*  
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Add new role',
+            required: true,
+            schema: {
+                $title: 'Лайк',
+                $description: 'Пользователь может лайкать понравившиеся задачи',
+            }
+        }
+    } */
 })
 
 rolesRouter.put("/roles/:id", async function (req: Request, resp: Response) {

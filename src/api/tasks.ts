@@ -1,5 +1,5 @@
 import express, { Express, Request, Response } from 'express'
-import { Task} from '../db/entity';
+import { Task } from '../db/entities/task.entity';
 import { dataSource } from '../db/dataSource';
 import { Get, Post } from '@decorators/express';
 
@@ -27,6 +27,21 @@ tasksRouter.post("/tasks", async function(req: Request, resp: Response) {
     const task = await dataSource.getRepository(Task).create(req.body);
     const results = await dataSource.getRepository(Task).save(task);
     resp.json(results)
+    /*  
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Add new task',
+            required: true,
+            schema: {
+                $title: 'Сортировка массива',
+                $description: 'Сортировка массива',
+                $level: 0,
+                $tags: ['массив', 'сортировка']
+                $links: ['testlink.com'],
+                $user: 0
+            }
+        }
+    } */
 })
 
 tasksRouter.put("/tasks/:id", async function (req: Request, resp: Response) {
