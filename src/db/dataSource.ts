@@ -9,10 +9,13 @@ export const dataSource = new DataSource(
         "username": "postgres",
         "password": "qwertyvbnm",
         "database": "LeetCode",
-        "entities": ["src/db/entity.ts"],
+        "entities": [__dirname +'/../**/*.entity.{js,ts}'],
         "logging": true,
         "synchronize": true,
         "migrations": ["src/db/migrations/*.ts"],
         "migrationsTableName": "migrations",
     }
 )
+
+console.log(__dirname)
+console.log(dataSource.entityMetadatas)
