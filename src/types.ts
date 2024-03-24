@@ -1,14 +1,13 @@
-export enum ILevels  {
-    light = 0,
-    medium = 1,
-    hard = 2,
+export type ILevel = {
+    id: number;
+    title: string
 }
 
 export type ITask = {
     id: number,
     title: string,
     description: string,
-    level: ILevels
+    level: ILevel
     tags: string[]
     links: string[]
 }
@@ -40,4 +39,9 @@ export type IComment = {
     text: string,
     task: ITask,
     user: IUser
+}
+
+export type ITaskType = {
+    id: number,
+    title: string
 }

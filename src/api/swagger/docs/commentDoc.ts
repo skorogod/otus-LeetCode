@@ -42,6 +42,17 @@
  *   get:
  *     summary: get list of comments
  *     tags: [Comments]
+ *     parameters:
+ *       - in: query
+ *         name: taskId
+ *         schema:
+ *           type: integer
+ *         description: The id of task, that was commented
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: integer
+ *         description: The id of user, who commented task   
  *     responses:
  *       200:
  *         description: Get list of comment

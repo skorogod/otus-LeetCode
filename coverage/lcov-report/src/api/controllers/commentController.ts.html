@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/api/controllers/roleController.ts</title>
+    <title>Code coverage report for src/api/controllers/commentController.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/api/controllers</a> roleController.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/api/controllers</a> commentController.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>26/26</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>8/10</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>26/26</span>
+                <span class='fraction'>28/28</span>
             </div>
         
             
@@ -131,7 +131,31 @@
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,7 +177,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,69 +246,92 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
+import { IComment } from "../../types";
 &nbsp;
-export const roles = [
+export const comments: IComment[] = [
   {
     id: 0,
-    title: "Пользователь",
-    description: "Описание роли",
-    rules: [
-      {
+    date: "2024-03-23T10:04:02",
+    text: "Интересно",
+    task: {
+      id: 0,
+      title: "Сортировка массива",
+      description: "Отсортируйте массив [2,4,1,6]",
+      level: {id: 0, title: 'light'},
+      tags: ["Массив", "сортировка"],
+      links: ["testlink.com"],
+    },
+    user: {
+      id: 0,
+      email: "test@mail.ru",
+      password: "qwertyvbnm",
+      username: "user123",
+      role: {
         id: 0,
-        title: "Просмотр задач",
-        description: "Пользователь может просматривать информацию о задачах",
+        title: "Пользователь",
+        description: "Описание роли",
+        rules: [
+          {
+            id: 0,
+            title: "Просмотр задач",
+            description:
+              "Пользователь может просматривать информацию о задачах",
+          },
+          {
+            id: 1,
+            title: "Выполнение задач",
+            description: "Пользователь может выполнять задачи",
+          },
+        ],
       },
-      {
-        id: 1,
-        title: "Выполнение задач",
-        description: "Пользователь может выполнять задачи",
-      },
-    ],
+    },
   },
 ];
 &nbsp;
-exports.roleList = async function (req: Request, resp: Response) {
-  return resp.json(roles);
+exports.commentList = async function (req: Request, resp: Response) {
+  const taskId = req.query.task ? <span class="branch-0 cbranch-no" title="branch not covered" >req.query.task </span>: undefined
+  const userId = req.query.user ? <span class="branch-0 cbranch-no" title="branch not covered" >req.query.user </span>: undefined
+  resp.json(comments);
 };
 &nbsp;
-exports.roleDetail = async function (req: Request, resp: Response) {
-  const roleId = Number(req.params.id);
-  const role = roles.filter((el) =&gt; {
-    return el.id === roleId;
+exports.commentDetail = async function (req: Request, resp: Response) {
+  const commentId = Number(req.params.id);
+  const comment = comments.filter((el) =&gt; {
+    return el.id === commentId;
   });
 &nbsp;
-  if (role.length) {
-    return resp.json(role[0]);
+  if (comment.length) {
+    return resp.json(comment[0]);
   } else {
     return resp.sendStatus(404);
   }
 };
 &nbsp;
-exports.roleCreate = async function (req: Request, resp: Response) {
+exports.commentCreate = async function (req: Request, resp: Response) {
   return resp.json(req.body);
 };
 &nbsp;
-exports.roleUpdate = async function (req: Request, resp: Response) {
-  const roleId = Number(req.params.id);
-  const role = roles.filter((el) =&gt; {
-    return el.id === roleId;
+exports.commentUpdate = async function (req: Request, resp: Response) {
+  const commentId = Number(req.params.id);
+  const comment = comments.filter((el) =&gt; {
+    return el.id === commentId;
   });
 &nbsp;
-  if (role.length) {
+  if (comment.length) {
     return resp.json(req.body);
   } else {
     return resp.sendStatus(404);
   }
 };
 &nbsp;
-exports.roleDelete = async function (req: Request, resp: Response) {
-  const roleId = Number(req.params.id);
-  const role = roles.filter((el) =&gt; {
-    return el.id === roleId;
+exports.commentDelete = async function (req: Request, resp: Response) {
+  const commentId = Number(req.params.id);
+  const comment = comments.filter((el) =&gt; {
+    return el.id === commentId;
   });
 &nbsp;
-  if (role.length) {
-    return resp.json(role[0]);
+  if (comment.length) {
+    return resp.json(comment[0]);
   } else {
     return resp.sendStatus(404);
   }

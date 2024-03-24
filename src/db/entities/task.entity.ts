@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToOne } from "typeorm";
-import { ITask, IComment, ILevels, IUser } from "../../types";
+import { ITask, IComment, ILevel, IUser } from "../../types";
 import { Comment } from "./comment.entity";
 import { User } from "./user.entity";
+import { Level } from "./level.entity";
 
 @Entity({name: 'tasks'})
 export class Task implements ITask{
@@ -14,8 +15,8 @@ export class Task implements ITask{
     @Column()
     description: string;
 
-    @Column()
-    level: ILevels;
+    @ManyToOne(() => Level, (level) => level.tasks)
+    level: ILevel;
 
     @Column('text', {array: true})
     tags: string[];

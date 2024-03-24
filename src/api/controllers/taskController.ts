@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
-import { ILevels } from "../../types";
 
 export const tasks = [
   {
     id: 0,
     title: "Сортировка массива",
     description: "Отсортируйте массив [2,4,1,6]",
-    level: ILevels.light,
+    level: {id: 0, title: 'light'},
     tags: ["Массив", "сортировка"],
     links: ["testlink.com"],
   },

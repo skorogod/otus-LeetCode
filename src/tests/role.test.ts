@@ -5,6 +5,12 @@ const request = require('supertest')
 
 import { roles } from "../api/controllers/roleController";
 
+const role = {
+    title: 'Подьзователь',
+    description: 'Пользователь со стандартными правами',
+    roles: [0,1]
+}
+
 describe("test roles routes", () => {
     test("It should response role list after GET", async () => {
         const response = await request(app).get('/roles');
@@ -22,11 +28,6 @@ describe("test roles routes", () => {
     })
 
     test("It should response body of request, after POST", async () => {
-        const role = {
-            title: 'Подьзователь',
-            description: 'Пользователь со стандартными правами',
-            roles: [0,1]
-        }
         const response = await request(app)
                                 .post("/roles")
                                 .send(role)
@@ -35,11 +36,6 @@ describe("test roles routes", () => {
     })
 
     test("It should response body of request, after PATCH", async () => {
-        const role = {
-            title: 'Подьзователь',
-            description: 'Пользователь со стандартными правами',
-            roles: [0,1]
-        }
         const response = await request(app)
                                 .patch("/roles/0")
                                 .send(role)
@@ -48,11 +44,6 @@ describe("test roles routes", () => {
     })
 
     test("It should send 404 status, after PATCH", async () => {
-        const role = {
-            title: 'Подьзователь',
-            description: 'Пользователь со стандартными правами',
-            roles: [0,1]
-        }
         const response = await request(app)
                                 .patch("/roles/3")
                                 .send(role)
@@ -60,11 +51,6 @@ describe("test roles routes", () => {
     })
 
     test("It should response body of request, after PUT", async () => {
-        const role = {
-            title: 'Подьзователь',
-            description: 'Пользователь со стандартными правами',
-            rules: [0,1]
-        }
         const response = await request(app)
                                 .put("/roles/0")
                                 .send(role)
@@ -73,11 +59,6 @@ describe("test roles routes", () => {
     })
 
     test("It should send 404 status, after PUT", async () => {
-        const role = {
-            title: 'Подьзователь',
-            description: 'Пользователь со стандартными правами',
-            rules: [0,1]
-        }
         const response = await request(app)
                                 .put("/roles/3")
                                 .send(role)
@@ -85,11 +66,6 @@ describe("test roles routes", () => {
     })
 
     test("It should response role object, after DELETE", async () => {
-        const role = {
-            title: 'Подьзователь',
-            description: 'Пользователь со стандартными правами',
-            rules: [0,1]
-        }
         const response = await request(app).delete("/roles/0")
         expect(response.statusCode).toBe(200);
         expect(response.body).toEqual(roles[0])

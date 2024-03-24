@@ -1,6 +1,6 @@
 import express, { Response, Request } from 'express';
 
-const commentController = require('../controllers/commentComtroller')
+const commentController = require('../controllers/commentController')
 
 export const commentsRouter = express.Router();
 

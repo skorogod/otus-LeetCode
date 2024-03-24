@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/api/routes/rules.ts</title>
+    <title>Code coverage report for src/api/routes/levels.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/api/routes</a> rules.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/api/routes</a> levels.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -80,8 +80,7 @@
 <a name='L15'></a><a href='#L15'>15</a>
 <a name='L16'></a><a href='#L16'>16</a>
 <a name='L17'></a><a href='#L17'>17</a>
-<a name='L18'></a><a href='#L18'>18</a>
-<a name='L19'></a><a href='#L19'>19</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L18'></a><a href='#L18'>18</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -98,25 +97,23 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from 'express'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from "express";
 &nbsp;
-export const rulesRouter = express.Router();
+export const levelsRouter = express.Router();
 &nbsp;
-const ruleController = require('../controllers/ruleController')
+const levelController = require("../controllers/levelController");
 &nbsp;
-rulesRouter.get('/rules', ruleController.ruleList)
+levelsRouter.get("/levels", levelController.levelList);
 &nbsp;
-rulesRouter.get('/rules/:id', ruleController.ruleDetail)
+levelsRouter.get("/levels/:id", levelController.levelDetail);
 &nbsp;
-rulesRouter.post("/rules", ruleController.ruleCreate)
+levelsRouter.post("/levels", levelController.levelCreate);
 &nbsp;
-rulesRouter.put("/rules/:id", ruleController.ruleUpdate)
+levelsRouter.put("/levels/:id", levelController.levelUpdate);
 &nbsp;
-rulesRouter.patch("/rules/:id", ruleController.ruleUpdate)
+levelsRouter.patch("/levels/:id", levelController.levelUpdate);
 &nbsp;
-rulesRouter.delete('/rules/:id', ruleController.ruleDelete)
-&nbsp;
+levelsRouter.delete("/levels/:id", levelController.levelDelete);
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

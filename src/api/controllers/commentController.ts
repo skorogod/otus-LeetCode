@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IComment, ILevels } from "../../types";
+import { IComment } from "../../types";
 
 export const comments: IComment[] = [
   {
@@ -10,7 +10,7 @@ export const comments: IComment[] = [
       id: 0,
       title: "Сортировка массива",
       description: "Отсортируйте массив [2,4,1,6]",
-      level: ILevels.light,
+      level: {id: 0, title: 'light'},
       tags: ["Массив", "сортировка"],
       links: ["testlink.com"],
     },
@@ -42,6 +42,8 @@ export const comments: IComment[] = [
 ];
 
 exports.commentList = async function (req: Request, resp: Response) {
+  const taskId = req.query.task ? req.query.task : undefined
+  const userId = req.query.user ? req.query.user : undefined
   resp.json(comments);
 };
 
