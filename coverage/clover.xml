@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711288555526" clover="3.2.0">
-  <project timestamp="1711288555526" name="All files">
+<coverage generated="1711292359042" clover="3.2.0">
+  <project timestamp="1711292359042" name="All files">
     <metrics statements="218" coveredstatements="216" conditionals="40" coveredconditionals="38" methods="50" coveredmethods="48" elements="308" coveredelements="302" complexity="0" loc="218" ncloc="218" packages="3" files="13" classes="13"/>
     <package name="src">
       <metrics statements="12" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
@@ -24,34 +24,34 @@
       <metrics statements="158" coveredstatements="158" conditionals="40" coveredconditionals="38" methods="48" coveredmethods="48"/>
       <file name="commentController.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript Pro\LeetCode_back\src\api\controllers\commentController.ts">
         <metrics statements="28" coveredstatements="28" conditionals="10" coveredconditionals="8" methods="8" coveredmethods="8"/>
-        <line num="4" count="6" type="stmt"/>
-        <line num="44" count="6" type="stmt"/>
-        <line num="45" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="46" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="50" count="6" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="52" count="2" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="46" count="6" type="stmt"/>
+        <line num="47" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="52" count="6" type="stmt"/>
         <line num="53" count="2" type="stmt"/>
-        <line num="56" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="57" count="1" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="58" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="59" count="1" type="stmt"/>
-        <line num="63" count="6" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="67" count="6" type="stmt"/>
-        <line num="68" count="4" type="stmt"/>
-        <line num="69" count="4" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="65" count="6" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="69" count="6" type="stmt"/>
         <line num="70" count="4" type="stmt"/>
-        <line num="73" count="4" type="cond" truecount="2" falsecount="0"/>
-        <line num="74" count="2" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="75" count="4" type="cond" truecount="2" falsecount="0"/>
         <line num="76" count="2" type="stmt"/>
-        <line num="80" count="6" type="stmt"/>
-        <line num="81" count="2" type="stmt"/>
-        <line num="82" count="2" type="stmt"/>
+        <line num="78" count="2" type="stmt"/>
+        <line num="82" count="6" type="stmt"/>
         <line num="83" count="2" type="stmt"/>
-        <line num="86" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="87" count="1" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="85" count="2" type="stmt"/>
+        <line num="88" count="2" type="cond" truecount="2" falsecount="0"/>
         <line num="89" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
       </file>
       <file name="levelController.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript Pro\LeetCode_back\src\api\controllers\levelController.ts">
         <metrics statements="26" coveredstatements="26" conditionals="6" coveredconditionals="6" methods="8" coveredmethods="8"/>
@@ -203,69 +203,69 @@
       <metrics statements="48" coveredstatements="48" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="comments.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript Pro\LeetCode_back\src\api\routes\comments.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="8" count="6" type="stmt"/>
-        <line num="10" count="6" type="stmt"/>
-        <line num="12" count="6" type="stmt"/>
-        <line num="14" count="6" type="stmt"/>
-        <line num="16" count="6" type="stmt"/>
-        <line num="18" count="6" type="stmt"/>
+        <line num="39" count="6" type="stmt"/>
+        <line num="41" count="6" type="stmt"/>
+        <line num="70" count="6" type="stmt"/>
+        <line num="98" count="6" type="stmt"/>
+        <line num="123" count="6" type="stmt"/>
+        <line num="157" count="6" type="stmt"/>
+        <line num="191" count="6" type="stmt"/>
+        <line num="219" count="6" type="stmt"/>
       </file>
       <file name="levels.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript Pro\LeetCode_back\src\api\routes\levels.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="17" count="6" type="stmt"/>
+        <line num="33" count="6" type="stmt"/>
+        <line num="35" count="6" type="stmt"/>
+        <line num="64" count="6" type="stmt"/>
+        <line num="92" count="6" type="stmt"/>
+        <line num="117" count="6" type="stmt"/>
+        <line num="151" count="6" type="stmt"/>
+        <line num="185" count="6" type="stmt"/>
+        <line num="213" count="6" type="stmt"/>
       </file>
       <file name="roles.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript Pro\LeetCode_back\src\api\routes\roles.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="17" count="6" type="stmt"/>
+        <line num="34" count="6" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="65" count="6" type="stmt"/>
+        <line num="93" count="6" type="stmt"/>
+        <line num="118" count="6" type="stmt"/>
+        <line num="152" count="6" type="stmt"/>
+        <line num="186" count="6" type="stmt"/>
+        <line num="214" count="6" type="stmt"/>
       </file>
       <file name="rules.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript Pro\LeetCode_back\src\api\routes\rules.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="17" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="30" count="6" type="stmt"/>
+        <line num="59" count="6" type="stmt"/>
+        <line num="87" count="6" type="stmt"/>
+        <line num="112" count="6" type="stmt"/>
+        <line num="146" count="6" type="stmt"/>
+        <line num="180" count="6" type="stmt"/>
+        <line num="208" count="6" type="stmt"/>
       </file>
       <file name="tasks.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript Pro\LeetCode_back\src\api\routes\tasks.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="17" count="6" type="stmt"/>
+        <line num="45" count="6" type="stmt"/>
+        <line num="47" count="6" type="stmt"/>
+        <line num="76" count="6" type="stmt"/>
+        <line num="104" count="6" type="stmt"/>
+        <line num="129" count="6" type="stmt"/>
+        <line num="163" count="6" type="stmt"/>
+        <line num="197" count="6" type="stmt"/>
+        <line num="225" count="6" type="stmt"/>
       </file>
       <file name="users.ts" path="C:\Users\igor\Desktop\OTUS\FullStackDeveloper\WorkDir\JavaScript Pro\LeetCode_back\src\api\routes\users.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="5" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="14" count="6" type="stmt"/>
-        <line num="16" count="6" type="stmt"/>
+        <line num="38" count="6" type="stmt"/>
+        <line num="40" count="6" type="stmt"/>
+        <line num="69" count="6" type="stmt"/>
+        <line num="97" count="6" type="stmt"/>
+        <line num="122" count="6" type="stmt"/>
+        <line num="156" count="6" type="stmt"/>
+        <line num="190" count="6" type="stmt"/>
+        <line num="218" count="6" type="stmt"/>
       </file>
     </package>
   </project>

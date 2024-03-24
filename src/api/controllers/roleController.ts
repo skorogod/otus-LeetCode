@@ -20,11 +20,11 @@ export const roles = [
   },
 ];
 
-exports.roleList = async function (req: Request, resp: Response) {
+exports.getRoles = async function (req: Request, resp: Response) {
   return resp.json(roles);
 };
 
-exports.roleDetail = async function (req: Request, resp: Response) {
+exports.getRoleById = async function (req: Request, resp: Response) {
   const roleId = Number(req.params.id);
   const role = roles.filter((el) => {
     return el.id === roleId;
@@ -37,11 +37,11 @@ exports.roleDetail = async function (req: Request, resp: Response) {
   }
 };
 
-exports.roleCreate = async function (req: Request, resp: Response) {
+exports.createRole = async function (req: Request, resp: Response) {
   return resp.json(req.body);
 };
 
-exports.roleUpdate = async function (req: Request, resp: Response) {
+exports.updateRole = async function (req: Request, resp: Response) {
   const roleId = Number(req.params.id);
   const role = roles.filter((el) => {
     return el.id === roleId;
@@ -54,7 +54,7 @@ exports.roleUpdate = async function (req: Request, resp: Response) {
   }
 };
 
-exports.roleDelete = async function (req: Request, resp: Response) {
+exports.deleteRole = async function (req: Request, resp: Response) {
   const roleId = Number(req.params.id);
   const role = roles.filter((el) => {
     return el.id === roleId;

@@ -26,11 +26,11 @@ export const users = [
   },
 ];
 
-exports.userList = async function (req: Request, resp: Response) {
+exports.getUsers = async function (req: Request, resp: Response) {
   return resp.json(users);
 };
 
-exports.userDetail = async function (req: Request, resp: Response) {
+exports.getUserById = async function (req: Request, resp: Response) {
   const userId = Number(req.params.id);
   const user = users.filter((el) => {
     return el.id === userId;
@@ -43,11 +43,11 @@ exports.userDetail = async function (req: Request, resp: Response) {
   }
 };
 
-exports.userCreate = async function (req: Request, resp: Response) {
+exports.createUser = async function (req: Request, resp: Response) {
   return resp.json(req.body);
 };
 
-exports.userUpdate = async function (req: Request, resp: Response) {
+exports.updateUser = async function (req: Request, resp: Response) {
   const userId = Number(req.params.id);
   const user = users.filter((el) => {
     return el.id === userId;
@@ -60,7 +60,7 @@ exports.userUpdate = async function (req: Request, resp: Response) {
   }
 };
 
-exports.userDelete = async function (req: Request, resp: Response) {
+exports.deleteUser = async function (req: Request, resp: Response) {
   const userId = Number(req.params.id);
   const user = users.filter((el) => {
     return el.id === userId;

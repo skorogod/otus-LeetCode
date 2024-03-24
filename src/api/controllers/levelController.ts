@@ -7,11 +7,11 @@ export const levels = [
   },
 ];
 
-exports.levelList = async function (req: Request, resp: Response) {
+exports.getLevels = async function (req: Request, resp: Response) {
   return resp.json(levels);
 };
 
-exports.levelDetail = async function (req: Request, resp: Response) {
+exports.getLevelById = async function (req: Request, resp: Response) {
   const levelId = Number(req.params.id);
   const level = levels.filter((el) => {
     return el.id === levelId;
@@ -24,11 +24,11 @@ exports.levelDetail = async function (req: Request, resp: Response) {
   }
 };
 
-exports.levelCreate = async function (req: Request, resp: Response) {
+exports.createLevel = async function (req: Request, resp: Response) {
   return resp.json(req.body);
 };
 
-exports.levelUpdate = async function (req: Request, resp: Response) {
+exports.updateLevel = async function (req: Request, resp: Response) {
   const levelId = Number(req.params.id);
   const level = levels.filter((el) => {
     return el.id === levelId;
@@ -41,7 +41,7 @@ exports.levelUpdate = async function (req: Request, resp: Response) {
   }
 };
 
-exports.levelDelete = async function (req: Request, resp: Response) {
+exports.deleteLevel = async function (req: Request, resp: Response) {
   const levelId = Number(req.params.id);
   const level = levels.filter((el) => {
     return el.id === levelId;

@@ -1,3 +1,5 @@
+
+
 import { Request, Response } from "express";
 import { IComment } from "../../types";
 
@@ -41,13 +43,13 @@ export const comments: IComment[] = [
   },
 ];
 
-exports.commentList = async function (req: Request, resp: Response) {
+exports.getComments = async function (req: Request, resp: Response) {
   const taskId = req.query.task ? req.query.task : undefined
   const userId = req.query.user ? req.query.user : undefined
   resp.json(comments);
 };
 
-exports.commentDetail = async function (req: Request, resp: Response) {
+exports.getCommentById = async function (req: Request, resp: Response) {
   const commentId = Number(req.params.id);
   const comment = comments.filter((el) => {
     return el.id === commentId;
@@ -60,11 +62,11 @@ exports.commentDetail = async function (req: Request, resp: Response) {
   }
 };
 
-exports.commentCreate = async function (req: Request, resp: Response) {
+exports.createComment = async function (req: Request, resp: Response) {
   return resp.json(req.body);
 };
 
-exports.commentUpdate = async function (req: Request, resp: Response) {
+exports.updateComment = async function (req: Request, resp: Response) {
   const commentId = Number(req.params.id);
   const comment = comments.filter((el) => {
     return el.id === commentId;
@@ -77,7 +79,7 @@ exports.commentUpdate = async function (req: Request, resp: Response) {
   }
 };
 
-exports.commentDelete = async function (req: Request, resp: Response) {
+exports.deleteComment = async function (req: Request, resp: Response) {
   const commentId = Number(req.params.id);
   const comment = comments.filter((el) => {
     return el.id === commentId;

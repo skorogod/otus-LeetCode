@@ -11,11 +11,11 @@ export const tasks = [
   },
 ];
 
-exports.taskList = async function (req: Request, resp: Response) {
+exports.getTasks = async function (req: Request, resp: Response) {
   return resp.json(tasks);
 };
 
-exports.taskDetail = async function (req: Request, resp: Response) {
+exports.getTaskById = async function (req: Request, resp: Response) {
   const taskId = Number(req.params.id);
   const task = tasks.filter((el) => {
     return el.id === taskId;
@@ -28,11 +28,11 @@ exports.taskDetail = async function (req: Request, resp: Response) {
   }
 };
 
-exports.taskCreate = async function (req: Request, resp: Response) {
+exports.createTask = async function (req: Request, resp: Response) {
   return resp.json(req.body);
 };
 
-exports.taskUpdate = async function (req: Request, resp: Response) {
+exports.updateTask = async function (req: Request, resp: Response) {
   const taskId = Number(req.params.id);
   const task = tasks.filter((el) => {
     return el.id === taskId;
@@ -45,7 +45,7 @@ exports.taskUpdate = async function (req: Request, resp: Response) {
   }
 };
 
-exports.taskDelete = async function (req: Request, resp: Response) {
+exports.deleteTask = async function (req: Request, resp: Response) {
   const taskId = Number(req.params.id);
   const task = tasks.filter((el) => {
     return el.id === taskId;

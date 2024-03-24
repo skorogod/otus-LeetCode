@@ -13,11 +13,11 @@ export const rules = [
   },
 ];
 
-exports.ruleList = async function (req: Request, resp: Response) {
+exports.getRules = async function (req: Request, resp: Response) {
   return resp.json(rules);
 };
 
-exports.ruleDetail = async function (req: Request, resp: Response) {
+exports.getRuleById = async function (req: Request, resp: Response) {
   const ruleId = Number(req.params.id);
   const rule = rules.filter((el) => {
     return el.id === ruleId;
@@ -30,11 +30,11 @@ exports.ruleDetail = async function (req: Request, resp: Response) {
   }
 };
 
-exports.ruleCreate = async function (req: Request, resp: Response) {
+exports.createRule = async function (req: Request, resp: Response) {
   return resp.json(req.body);
 };
 
-exports.ruleUpdate = async function (req: Request, resp: Response) {
+exports.updateRule = async function (req: Request, resp: Response) {
   const ruleId = Number(req.params.id);
   const rule = rules.filter((el) => {
     return el.id === ruleId;
@@ -47,7 +47,7 @@ exports.ruleUpdate = async function (req: Request, resp: Response) {
   }
 };
 
-exports.ruleDelete = async function (req: Request, resp: Response) {
+exports.deleteRule = async function (req: Request, resp: Response) {
   const ruleId = Number(req.params.id);
   const rule = rules.filter((el) => {
     return el.id === ruleId;
