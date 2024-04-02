@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 export const levels = [
   {
     id: 0,
-    title: "light"
+    title: 'light',
   },
 ];
 

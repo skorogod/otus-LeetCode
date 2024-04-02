@@ -35,10 +35,9 @@
 
 import express from 'express';
 
-const userController = require('../controllers/userController')
+const userController = require('../controllers/userController');
 
 export const usersRouter = express.Router();
-
 
 /**
  * @swagger
@@ -56,7 +55,7 @@ export const usersRouter = express.Router();
  *         name: userId
  *         schema:
  *           type: integer
- *         description: The id of user, who usered task   
+ *         description: The id of user, who usered task
  *     responses:
  *       200:
  *         description: Get list of user
@@ -66,7 +65,7 @@ export const usersRouter = express.Router();
  *               $ref: '#/components/schemas/User'
  */
 
-usersRouter.get('/users', userController.getUsers)
+usersRouter.get('/users', userController.getUsers);
 
 /**
  * @swagger
@@ -94,9 +93,9 @@ usersRouter.get('/users', userController.getUsers)
  *         description: Some server error
  */
 
-usersRouter.get('/users/:id', userController.getUserById)
+usersRouter.get('/users/:id', userController.getUserById);
 
-/** 
+/**
  * @swagger
  * /users:
  *   post:
@@ -119,100 +118,100 @@ usersRouter.get('/users/:id', userController.getUserById)
  *         description: Some server error
  */
 
-usersRouter.post("/users", userController.createUser)
+usersRouter.post('/users', userController.createUser);
 
 /**
-* @swagger
-* /users/{id}:
-*   put:
-*     summary: Put special user
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of user
-*         schema:
-*           type: integer
-*     tags: [Users]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/User'
-*     responses:
-*       200:
-*         description: Put special user
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/User'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /users/{id}:
+ *   put:
+ *     summary: Put special user
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of user
+ *         schema:
+ *           type: integer
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: Put special user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-usersRouter.put("/users/:id", userController.updateUser)
-
-/**
-* @swagger
-* /users/{id}:
-*   patch:
-*     summary: Patch special user
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of user
-*         schema:
-*           type: integer
-*     tags: [Users]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/User'
-*     responses:
-*       200:
-*         description: Patch special user
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/User'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
-
-usersRouter.patch("/users/:id", userController.updateUser)
+usersRouter.put('/users/:id', userController.updateUser);
 
 /**
-* @swagger
-* /users/{id}:
-*   delete:
-*     summary: Delete special user
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of user
-*         schema:
-*           type: integer
-*     tags: [Users]
-*     responses:
-*       200:
-*         description: Delete special user
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/User'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /users/{id}:
+ *   patch:
+ *     summary: Patch special user
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of user
+ *         schema:
+ *           type: integer
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: Patch special user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-usersRouter.delete('/users/:id', userController.deleteUser)
+usersRouter.patch('/users/:id', userController.updateUser);
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   delete:
+ *     summary: Delete special user
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of user
+ *         schema:
+ *           type: integer
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: Delete special user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
+
+usersRouter.delete('/users/:id', userController.deleteUser);

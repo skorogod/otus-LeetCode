@@ -25,10 +25,9 @@
 
 import express from 'express';
 
-const ruleController = require('../controllers/ruleController')
+const ruleController = require('../controllers/ruleController');
 
 export const rulesRouter = express.Router();
-
 
 /**
  * @swagger
@@ -46,7 +45,7 @@ export const rulesRouter = express.Router();
  *         name: userId
  *         schema:
  *           type: integer
- *         description: The id of user, who ruleed task   
+ *         description: The id of user, who ruleed task
  *     responses:
  *       200:
  *         description: Get list of rule
@@ -56,7 +55,7 @@ export const rulesRouter = express.Router();
  *               $ref: '#/components/schemas/Rule'
  */
 
-rulesRouter.get('/rules', ruleController.getRules)
+rulesRouter.get('/rules', ruleController.getRules);
 
 /**
  * @swagger
@@ -84,9 +83,9 @@ rulesRouter.get('/rules', ruleController.getRules)
  *         description: Some server error
  */
 
-rulesRouter.get('/rules/:id', ruleController.getRuleById)
+rulesRouter.get('/rules/:id', ruleController.getRuleById);
 
-/** 
+/**
  * @swagger
  * /rules:
  *   post:
@@ -109,100 +108,100 @@ rulesRouter.get('/rules/:id', ruleController.getRuleById)
  *         description: Some server error
  */
 
-rulesRouter.post("/rules", ruleController.createRule)
+rulesRouter.post('/rules', ruleController.createRule);
 
 /**
-* @swagger
-* /rules/{id}:
-*   put:
-*     summary: Put special rule
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of rule
-*         schema:
-*           type: integer
-*     tags: [Rules]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Rule'
-*     responses:
-*       200:
-*         description: Put special rule
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Rule'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /rules/{id}:
+ *   put:
+ *     summary: Put special rule
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of rule
+ *         schema:
+ *           type: integer
+ *     tags: [Rules]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Rule'
+ *     responses:
+ *       200:
+ *         description: Put special rule
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Rule'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-rulesRouter.put("/rules/:id", ruleController.updateRule)
-
-/**
-* @swagger
-* /rules/{id}:
-*   patch:
-*     summary: Patch special rule
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of rule
-*         schema:
-*           type: integer
-*     tags: [Rules]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Rule'
-*     responses:
-*       200:
-*         description: Patch special rule
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Rule'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
-
-rulesRouter.patch("/rules/:id", ruleController.updateRule)
+rulesRouter.put('/rules/:id', ruleController.updateRule);
 
 /**
-* @swagger
-* /rules/{id}:
-*   delete:
-*     summary: Delete special rule
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of rule
-*         schema:
-*           type: integer
-*     tags: [Rules]
-*     responses:
-*       200:
-*         description: Delete special rule
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Rule'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /rules/{id}:
+ *   patch:
+ *     summary: Patch special rule
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of rule
+ *         schema:
+ *           type: integer
+ *     tags: [Rules]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Rule'
+ *     responses:
+ *       200:
+ *         description: Patch special rule
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Rule'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-rulesRouter.delete('/rules/:id', ruleController.deleteRule)
+rulesRouter.patch('/rules/:id', ruleController.updateRule);
+
+/**
+ * @swagger
+ * /rules/{id}:
+ *   delete:
+ *     summary: Delete special rule
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of rule
+ *         schema:
+ *           type: integer
+ *     tags: [Rules]
+ *     responses:
+ *       200:
+ *         description: Delete special rule
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Rule'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
+
+rulesRouter.delete('/rules/:id', ruleController.deleteRule);

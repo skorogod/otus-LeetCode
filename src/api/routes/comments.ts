@@ -36,10 +36,9 @@
 
 import express from 'express';
 
-const commentController = require('../controllers/commentController')
+const commentController = require('../controllers/commentController');
 
 export const commentsRouter = express.Router();
-
 
 /**
  * @swagger
@@ -57,7 +56,7 @@ export const commentsRouter = express.Router();
  *         name: userId
  *         schema:
  *           type: integer
- *         description: The id of user, who commented task   
+ *         description: The id of user, who commented task
  *     responses:
  *       200:
  *         description: Get list of comment
@@ -67,7 +66,7 @@ export const commentsRouter = express.Router();
  *               $ref: '#/components/schemas/Comment'
  */
 
-commentsRouter.get('/comments', commentController.getComments)
+commentsRouter.get('/comments', commentController.getComments);
 
 /**
  * @swagger
@@ -95,9 +94,9 @@ commentsRouter.get('/comments', commentController.getComments)
  *         description: Some server error
  */
 
-commentsRouter.get('/comments/:id', commentController.getCommentById)
+commentsRouter.get('/comments/:id', commentController.getCommentById);
 
-/** 
+/**
  * @swagger
  * /comments:
  *   post:
@@ -120,100 +119,100 @@ commentsRouter.get('/comments/:id', commentController.getCommentById)
  *         description: Some server error
  */
 
-commentsRouter.post("/comments", commentController.createComment)
+commentsRouter.post('/comments', commentController.createComment);
 
 /**
-* @swagger
-* /comments/{id}:
-*   put:
-*     summary: Put special comment
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of comment
-*         schema:
-*           type: integer
-*     tags: [Comments]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Comment'
-*     responses:
-*       200:
-*         description: Put special comment
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Comment'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /comments/{id}:
+ *   put:
+ *     summary: Put special comment
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of comment
+ *         schema:
+ *           type: integer
+ *     tags: [Comments]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Comment'
+ *     responses:
+ *       200:
+ *         description: Put special comment
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Comment'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-commentsRouter.put("/comments/:id", commentController.updateComment)
-
-/**
-* @swagger
-* /comments/{id}:
-*   patch:
-*     summary: Patch special comment
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of comment
-*         schema:
-*           type: integer
-*     tags: [Comments]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Comment'
-*     responses:
-*       200:
-*         description: Patch special comment
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Comment'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
-
-commentsRouter.patch("/comments/:id", commentController.updateComment)
+commentsRouter.put('/comments/:id', commentController.updateComment);
 
 /**
-* @swagger
-* /comments/{id}:
-*   delete:
-*     summary: Delete special comment
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of comment
-*         schema:
-*           type: integer
-*     tags: [Comments]
-*     responses:
-*       200:
-*         description: Delete special comment
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Comment'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /comments/{id}:
+ *   patch:
+ *     summary: Patch special comment
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of comment
+ *         schema:
+ *           type: integer
+ *     tags: [Comments]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Comment'
+ *     responses:
+ *       200:
+ *         description: Patch special comment
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Comment'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-commentsRouter.delete('/comments/:id', commentController.deleteComment)
+commentsRouter.patch('/comments/:id', commentController.updateComment);
+
+/**
+ * @swagger
+ * /comments/{id}:
+ *   delete:
+ *     summary: Delete special comment
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of comment
+ *         schema:
+ *           type: integer
+ *     tags: [Comments]
+ *     responses:
+ *       200:
+ *         description: Delete special comment
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Comment'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
+
+commentsRouter.delete('/comments/:id', commentController.deleteComment);

@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 export const tasks = [
   {
     id: 0,
-    title: "Сортировка массива",
-    description: "Отсортируйте массив [2,4,1,6]",
-    level: {id: 0, title: 'light'},
-    tags: ["Массив", "сортировка"],
-    links: ["testlink.com"],
+    title: 'Сортировка массива',
+    description: 'Отсортируйте массив [2,4,1,6]',
+    level: { id: 0, title: 'light' },
+    tags: ['Массив', 'сортировка'],
+    links: ['testlink.com'],
   },
 ];
 

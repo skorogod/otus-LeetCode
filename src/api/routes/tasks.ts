@@ -42,10 +42,9 @@
 
 import express from 'express';
 
-const taskController = require('../controllers/taskController')
+const taskController = require('../controllers/taskController');
 
 export const tasksRouter = express.Router();
-
 
 /**
  * @swagger
@@ -63,7 +62,7 @@ export const tasksRouter = express.Router();
  *         name: userId
  *         schema:
  *           type: integer
- *         description: The id of user, who tasked task   
+ *         description: The id of user, who tasked task
  *     responses:
  *       200:
  *         description: Get list of task
@@ -73,7 +72,7 @@ export const tasksRouter = express.Router();
  *               $ref: '#/components/schemas/Task'
  */
 
-tasksRouter.get('/tasks', taskController.getTasks)
+tasksRouter.get('/tasks', taskController.getTasks);
 
 /**
  * @swagger
@@ -101,9 +100,9 @@ tasksRouter.get('/tasks', taskController.getTasks)
  *         description: Some server error
  */
 
-tasksRouter.get('/tasks/:id', taskController.getTaskById)
+tasksRouter.get('/tasks/:id', taskController.getTaskById);
 
-/** 
+/**
  * @swagger
  * /tasks:
  *   post:
@@ -126,100 +125,100 @@ tasksRouter.get('/tasks/:id', taskController.getTaskById)
  *         description: Some server error
  */
 
-tasksRouter.post("/tasks", taskController.createTask)
+tasksRouter.post('/tasks', taskController.createTask);
 
 /**
-* @swagger
-* /tasks/{id}:
-*   put:
-*     summary: Put special task
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of task
-*         schema:
-*           type: integer
-*     tags: [Tasks]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Task'
-*     responses:
-*       200:
-*         description: Put special task
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Task'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /tasks/{id}:
+ *   put:
+ *     summary: Put special task
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of task
+ *         schema:
+ *           type: integer
+ *     tags: [Tasks]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Task'
+ *     responses:
+ *       200:
+ *         description: Put special task
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Task'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-tasksRouter.put("/tasks/:id", taskController.updateTask)
-
-/**
-* @swagger
-* /tasks/{id}:
-*   patch:
-*     summary: Patch special task
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of task
-*         schema:
-*           type: integer
-*     tags: [Tasks]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Task'
-*     responses:
-*       200:
-*         description: Patch special task
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Task'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
-
-tasksRouter.patch("/tasks/:id", taskController.updateTask)
+tasksRouter.put('/tasks/:id', taskController.updateTask);
 
 /**
-* @swagger
-* /tasks/{id}:
-*   delete:
-*     summary: Delete special task
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of task
-*         schema:
-*           type: integer
-*     tags: [Tasks]
-*     responses:
-*       200:
-*         description: Delete special task
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Task'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /tasks/{id}:
+ *   patch:
+ *     summary: Patch special task
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of task
+ *         schema:
+ *           type: integer
+ *     tags: [Tasks]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Task'
+ *     responses:
+ *       200:
+ *         description: Patch special task
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Task'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-tasksRouter.delete('/tasks/:id', taskController.deleteTask)
+tasksRouter.patch('/tasks/:id', taskController.updateTask);
+
+/**
+ * @swagger
+ * /tasks/{id}:
+ *   delete:
+ *     summary: Delete special task
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of task
+ *         schema:
+ *           type: integer
+ *     tags: [Tasks]
+ *     responses:
+ *       200:
+ *         description: Delete special task
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Task'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
+
+tasksRouter.delete('/tasks/:id', taskController.deleteTask);

@@ -1,41 +1,39 @@
-
-
-import { Request, Response } from "express";
-import { IComment } from "../../types";
+import { Request, Response } from 'express';
+import { IComment } from '../../types';
 
 export const comments: IComment[] = [
   {
     id: 0,
-    date: "2024-03-23T10:04:02",
-    text: "Интересно",
+    date: '2024-03-23T10:04:02',
+    text: 'Интересно',
     task: {
       id: 0,
-      title: "Сортировка массива",
-      description: "Отсортируйте массив [2,4,1,6]",
-      level: {id: 0, title: 'light'},
-      tags: ["Массив", "сортировка"],
-      links: ["testlink.com"],
+      title: 'Сортировка массива',
+      description: 'Отсортируйте массив [2,4,1,6]',
+      level: { id: 0, title: 'light' },
+      tags: ['Массив', 'сортировка'],
+      links: ['testlink.com'],
     },
     user: {
       id: 0,
-      email: "test@mail.ru",
-      password: "qwertyvbnm",
-      username: "user123",
+      email: 'test@mail.ru',
+      password: 'qwertyvbnm',
+      username: 'user123',
       role: {
         id: 0,
-        title: "Пользователь",
-        description: "Описание роли",
+        title: 'Пользователь',
+        description: 'Описание роли',
         rules: [
           {
             id: 0,
-            title: "Просмотр задач",
+            title: 'Просмотр задач',
             description:
-              "Пользователь может просматривать информацию о задачах",
+              'Пользователь может просматривать информацию о задачах',
           },
           {
             id: 1,
-            title: "Выполнение задач",
-            description: "Пользователь может выполнять задачи",
+            title: 'Выполнение задач',
+            description: 'Пользователь может выполнять задачи',
           },
         ],
       },
@@ -44,8 +42,8 @@ export const comments: IComment[] = [
 ];
 
 exports.getComments = async function (req: Request, resp: Response) {
-  const taskId = req.query.task ? req.query.task : undefined
-  const userId = req.query.user ? req.query.user : undefined
+  const taskId = req.query.task ? req.query.task : undefined;
+  const userId = req.query.user ? req.query.user : undefined;
   resp.json(comments);
 };
 

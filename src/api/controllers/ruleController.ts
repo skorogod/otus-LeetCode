@@ -1,15 +1,15 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 export const rules = [
   {
     id: 0,
-    title: "Просмотр задач",
-    description: "Пользователь может просматривать информацию о задачах",
+    title: 'Просмотр задач',
+    description: 'Пользователь может просматривать информацию о задачах',
   },
   {
     id: 1,
-    title: "Выполнение задач",
-    description: "Пользователь может выполнять задачи",
+    title: 'Выполнение задач',
+    description: 'Пользователь может выполнять задачи',
   },
 ];
 

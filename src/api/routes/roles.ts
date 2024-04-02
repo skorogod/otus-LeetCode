@@ -31,10 +31,9 @@
 
 import express from 'express';
 
-const roleController = require('../controllers/roleController')
+const roleController = require('../controllers/roleController');
 
 export const rolesRouter = express.Router();
-
 
 /**
  * @swagger
@@ -52,7 +51,7 @@ export const rolesRouter = express.Router();
  *         name: userId
  *         schema:
  *           type: integer
- *         description: The id of user, who roleed task   
+ *         description: The id of user, who roleed task
  *     responses:
  *       200:
  *         description: Get list of role
@@ -62,7 +61,7 @@ export const rolesRouter = express.Router();
  *               $ref: '#/components/schemas/Role'
  */
 
-rolesRouter.get('/roles', roleController.getRoles)
+rolesRouter.get('/roles', roleController.getRoles);
 
 /**
  * @swagger
@@ -90,9 +89,9 @@ rolesRouter.get('/roles', roleController.getRoles)
  *         description: Some server error
  */
 
-rolesRouter.get('/roles/:id', roleController.getRoleById)
+rolesRouter.get('/roles/:id', roleController.getRoleById);
 
-/** 
+/**
  * @swagger
  * /roles:
  *   post:
@@ -115,100 +114,100 @@ rolesRouter.get('/roles/:id', roleController.getRoleById)
  *         description: Some server error
  */
 
-rolesRouter.post("/roles", roleController.createRole)
+rolesRouter.post('/roles', roleController.createRole);
 
 /**
-* @swagger
-* /roles/{id}:
-*   put:
-*     summary: Put special role
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of role
-*         schema:
-*           type: integer
-*     tags: [Roles]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Role'
-*     responses:
-*       200:
-*         description: Put special role
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Role'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /roles/{id}:
+ *   put:
+ *     summary: Put special role
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of role
+ *         schema:
+ *           type: integer
+ *     tags: [Roles]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Role'
+ *     responses:
+ *       200:
+ *         description: Put special role
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Role'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-rolesRouter.put("/roles/:id", roleController.updateRole)
-
-/**
-* @swagger
-* /roles/{id}:
-*   patch:
-*     summary: Patch special role
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of role
-*         schema:
-*           type: integer
-*     tags: [Roles]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Role'
-*     responses:
-*       200:
-*         description: Patch special role
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Role'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
-
-rolesRouter.patch("/roles/:id", roleController.updateRole)
+rolesRouter.put('/roles/:id', roleController.updateRole);
 
 /**
-* @swagger
-* /roles/{id}:
-*   delete:
-*     summary: Delete special role
-*     parameters:
-*       - name: id
-*         in: path
-*         required: true
-*         description: id of role
-*         schema:
-*           type: integer
-*     tags: [Roles]
-*     responses:
-*       200:
-*         description: Delete special role
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Role'
-*       404:
-*         description: Not found
-*       500:
-*         description: Some server error
-*/
+ * @swagger
+ * /roles/{id}:
+ *   patch:
+ *     summary: Patch special role
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of role
+ *         schema:
+ *           type: integer
+ *     tags: [Roles]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Role'
+ *     responses:
+ *       200:
+ *         description: Patch special role
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Role'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
 
-rolesRouter.delete('/roles/:id', roleController.deleteRole)
+rolesRouter.patch('/roles/:id', roleController.updateRole);
+
+/**
+ * @swagger
+ * /roles/{id}:
+ *   delete:
+ *     summary: Delete special role
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of role
+ *         schema:
+ *           type: integer
+ *     tags: [Roles]
+ *     responses:
+ *       200:
+ *         description: Delete special role
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Role'
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Some server error
+ */
+
+rolesRouter.delete('/roles/:id', roleController.deleteRole);
