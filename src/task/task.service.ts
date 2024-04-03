@@ -1,26 +1,37 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { TaskRepository } from './task.repository';
 
 @Injectable()
 export class TaskService {
+  constructor(private readonly repository: TaskRepository) { 
+  }
   create(createTaskDto: CreateTaskDto) {
-    return 'This action adds a new task';
+    return this.repository.create(createTaskDto)
   }
 
   findAll() {
-    return `This action returns all task`;
+    return this.repository.findAll()
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} task`;
+    const task = this.repository.find(id)
+    if(!task) {
+      throw new NotFoundException('Task not found')
+    }
+    return task;
   }
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+    return this.repository.update(id, updateTaskDto)
   }
 
   remove(id: number) {
-    return `This action removes a #${id} task`;
+   const task = this.repository.remove(id)
+   if (!task) {
+    throw new NotFoundException('Task not found')
+   }
+   return task
   }
 }

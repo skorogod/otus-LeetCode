@@ -1,26 +1,37 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
+import { LevelRepository } from './level.repository';
 
 @Injectable()
 export class LevelService {
+  constructor(private readonly repository: LevelRepository) { 
+  }
   create(createLevelDto: CreateLevelDto) {
-    return 'This action adds a new level';
+    return this.repository.create(createLevelDto)
   }
 
   findAll() {
-    return `This action returns all level`;
+    return this.repository.findAll()
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} level`;
+    const level = this.repository.find(id)
+    if(!level) {
+      throw new NotFoundException('Level not found')
+    }
+    return level;
   }
 
   update(id: number, updateLevelDto: UpdateLevelDto) {
-    return `This action updates a #${id} level`;
+    return this.repository.update(id, updateLevelDto)
   }
 
   remove(id: number) {
-    return `This action removes a #${id} level`;
+   const level = this.repository.remove(id)
+   if (!level) {
+    throw new NotFoundException('Level not found')
+   }
+   return level
   }
 }

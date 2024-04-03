@@ -1,26 +1,37 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { RoleRepository } from './role.repository';
 
 @Injectable()
 export class RoleService {
+  constructor(private readonly repository: RoleRepository) { 
+  }
   create(createRoleDto: CreateRoleDto) {
-    return 'This action adds a new role';
+    return this.repository.create(createRoleDto)
   }
 
   findAll() {
-    return `This action returns all role`;
+    return this.repository.findAll()
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} role`;
+    const role = this.repository.find(id)
+    if(!role) {
+      throw new NotFoundException('Role not found')
+    }
+    return role;
   }
 
   update(id: number, updateRoleDto: UpdateRoleDto) {
-    return `This action updates a #${id} role`;
+    return this.repository.update(id, updateRoleDto)
   }
 
   remove(id: number) {
-    return `This action removes a #${id} role`;
+   const role = this.repository.remove(id)
+   if (!role) {
+    throw new NotFoundException('Role not found')
+   }
+   return role
   }
 }

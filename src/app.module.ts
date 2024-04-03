@@ -1,7 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LessonsModule } from './lessons/lessons.module';
 import { LoggerMiddleware } from './logger.middleware';
 import { TaskModule } from './task/task.module';
 import { UserModule } from './user/user.module';
@@ -12,7 +11,7 @@ import { RoleModule } from './role/role.module';
 import { TaskTypeModule } from './task-type/task-type.module';
 
 @Module({
-  imports: [LessonsModule, TaskModule, UserModule, CommentModule, LevelModule, RuleModule, RoleModule, TaskTypeModule],
+  imports: [TaskModule, UserModule, CommentModule, LevelModule, RuleModule, RoleModule, TaskTypeModule],
   controllers: [AppController],
   providers: [AppService],
 })

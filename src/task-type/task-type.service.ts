@@ -1,26 +1,37 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskTypeDto } from './dto/create-task-type.dto';
 import { UpdateTaskTypeDto } from './dto/update-task-type.dto';
+import { TaskTypeRepository } from './task-type.repository';
 
 @Injectable()
 export class TaskTypeService {
+  constructor(private readonly repository: TaskTypeRepository) { 
+  }
   create(createTaskTypeDto: CreateTaskTypeDto) {
-    return 'This action adds a new taskType';
+    return this.repository.create(createTaskTypeDto)
   }
 
   findAll() {
-    return `This action returns all taskType`;
+    return this.repository.findAll()
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} taskType`;
+    const taskType = this.repository.find(id)
+    if(!taskType) {
+      throw new NotFoundException('TaskType not found')
+    }
+    return taskType;
   }
 
   update(id: number, updateTaskTypeDto: UpdateTaskTypeDto) {
-    return `This action updates a #${id} taskType`;
+    return this.repository.update(id, updateTaskTypeDto)
   }
 
   remove(id: number) {
-    return `This action removes a #${id} taskType`;
+   const taskType = this.repository.remove(id)
+   if (!taskType) {
+    throw new NotFoundException('TaskType not found')
+   }
+   return taskType
   }
 }
