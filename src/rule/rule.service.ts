@@ -24,7 +24,11 @@ export class RuleService {
   }
 
   update(id: number, updateRuleDto: UpdateRuleDto) {
-    return this.repository.update(id, updateRuleDto)
+    const rule = this.repository.update(id, updateRuleDto)
+    if(!rule) {
+      throw new NotFoundException('Rule not found')
+    }
+    return rule;
   }
 
   remove(id: number) {

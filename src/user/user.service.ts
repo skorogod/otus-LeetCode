@@ -24,7 +24,11 @@ export class UserService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return this.repository.update(id, updateUserDto)
+    const user = this.repository.update(id, updateUserDto)
+    if(!user) {
+      throw new NotFoundException('User not found')
+    }
+    return user;
   }
 
   remove(id: number) {

@@ -24,7 +24,11 @@ export class LevelService {
   }
 
   update(id: number, updateLevelDto: UpdateLevelDto) {
-    return this.repository.update(id, updateLevelDto)
+    const level = this.repository.update(id, updateLevelDto)
+    if(!level) {
+      throw new NotFoundException('Level not found')
+    }
+    return level;
   }
 
   remove(id: number) {

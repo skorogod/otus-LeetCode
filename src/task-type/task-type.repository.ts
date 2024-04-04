@@ -3,7 +3,7 @@ import { ITaskType } from "./interfaces/taskType.interface";
 
 @Injectable()
 export class TaskTypeRepository {
-    private taskTypes: ITaskType[] = [
+    taskTypes: ITaskType[] = [
         {
           id: 0,
           title: 'Сортировка массива'

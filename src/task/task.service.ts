@@ -24,7 +24,11 @@ export class TaskService {
   }
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
-    return this.repository.update(id, updateTaskDto)
+    const task = this.repository.update(id, updateTaskDto)
+    if(!task) {
+      throw new NotFoundException('Task not found')
+    }
+    return task;
   }
 
   remove(id: number) {

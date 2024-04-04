@@ -3,7 +3,7 @@ import { ILevel } from "./interfaces/level.interface";
 
 @Injectable()
 export class LevelRepository {
-    private levels: ILevel[] = [
+    levels: ILevel[] = [
         {
           id: 0,
           title: 'Легкий',
@@ -24,6 +24,7 @@ export class LevelRepository {
             ...newLevel,
             id: this.levels.length
         })
+        console.log("LEVELS ", this.levels)
         return this.levels.at(-1)
     };
     

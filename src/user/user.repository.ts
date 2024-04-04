@@ -3,7 +3,7 @@ import { IUser } from "./interfaces/user.interface";
 
 @Injectable()
 export class UserRepository {
-    private users: IUser[] = [
+    users: IUser[] = [
         {
           id: 0,
           email: 'test@mail.ru',

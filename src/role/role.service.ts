@@ -24,7 +24,11 @@ export class RoleService {
   }
 
   update(id: number, updateRoleDto: UpdateRoleDto) {
-    return this.repository.update(id, updateRoleDto)
+    const role = this.repository.update(id, updateRoleDto)
+    if(!role) {
+      throw new NotFoundException('Role not found')
+    }
+    return role;
   }
 
   remove(id: number) {

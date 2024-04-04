@@ -24,7 +24,11 @@ export class TaskTypeService {
   }
 
   update(id: number, updateTaskTypeDto: UpdateTaskTypeDto) {
-    return this.repository.update(id, updateTaskTypeDto)
+    const taskType = this.repository.update(id, updateTaskTypeDto)
+    if(!taskType) {
+      throw new NotFoundException('TaskType not found')
+    }
+    return taskType;
   }
 
   remove(id: number) {

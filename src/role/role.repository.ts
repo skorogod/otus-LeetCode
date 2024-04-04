@@ -3,7 +3,7 @@ import { IRole } from "./interfaces/role.interface";
 
 @Injectable()
 export class RoleRepository {
-    private roles: IRole[] = [
+    roles: IRole[] = [
         {
           id: 0,
           title: 'Пользователь',

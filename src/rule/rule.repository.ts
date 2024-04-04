@@ -3,7 +3,7 @@ import { IRule } from "./interfaces/rule.interface";
 
 @Injectable()
 export class RuleRepository {
-    private rules: IRule[] =[
+    rules: IRule[] =[
         {
           id: 0,
           title: 'Просмотр задач',
