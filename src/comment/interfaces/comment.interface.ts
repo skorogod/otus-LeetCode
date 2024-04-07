@@ -3,7 +3,7 @@ import { ITask } from "src/task/interfaces/task.interface";
 
 export type IComment = {
     id: number;
-    date: Date | string;
+    date: Date,
     text: string;
     task: ITask;
     user: IUser;

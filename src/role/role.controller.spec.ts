@@ -4,12 +4,14 @@ import { RoleService } from './role.service';
 import { RoleModule } from './role.module';
 import { INestApplication } from '@nestjs/common';
 import { RoleRepository } from './role.repository';
+import { Repository } from 'typeorm';
+import { Role } from './entities/role.entity';
 
 const request = require('supertest')
 
 describe('RoleController', () => {
   let controller: RoleController;
-  let repository: RoleRepository
+  let repository: Repository<Role>
   let app: INestApplication;
   const role = {
     title: "Пользователь",
@@ -24,7 +26,7 @@ describe('RoleController', () => {
     }).compile();
 
     controller = module.get<RoleController>(RoleController);
-    repository = module.get<RoleRepository>(RoleRepository)
+    repository = module.get<Repository<Role>>(Repository<Role>)
   });
 
   beforeAll(async () => {

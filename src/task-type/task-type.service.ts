@@ -1,41 +1,48 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskTypeDto } from './dto/create-task-type.dto';
 import { UpdateTaskTypeDto } from './dto/update-task-type.dto';
-import { TaskTypeRepository } from './task-type.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TaskType } from './entities/task-type.entity';
 
 @Injectable()
 export class TaskTypeService {
-  constructor(private readonly repository: TaskTypeRepository) { 
-  }
-  create(createTaskTypeDto: CreateTaskTypeDto) {
-    return this.repository.create(createTaskTypeDto)
+  constructor(
+    @InjectRepository(TaskType)
+    private repository: Repository<TaskType>
+  ){}
+
+  async create(createTaskTypeDto: CreateTaskTypeDto) {
+    const taskType = this.repository.create(createTaskTypeDto);
+    return await this.repository.save(taskType)
   }
 
-  findAll() {
-    return this.repository.findAll()
+  async findAll() {
+    return await this.repository.find();
   }
 
-  findOne(id: number) {
-    const taskType = this.repository.find(id)
-    if(!taskType) {
-      throw new NotFoundException('TaskType not found')
+  async findOne(id: number) {
+    const taskType = await this.repository.findOneBy({id});
+    if (!taskType) {
+      throw new NotFoundException('TaskType Not Found')
+    }
+    return taskType
+  }
+
+  async update(id: number, updateTaskTypeDto: UpdateTaskTypeDto) {
+    let taskType = await this.repository.findOneBy({id})
+    if (!taskType) {
+      throw new NotFoundException('TaskType Not Found')
+    }
+    taskType = this.repository.merge(taskType, updateTaskTypeDto)
+    return await this.repository.save(taskType);
+  }
+
+  async remove(id: number) {
+    const taskType = await this.repository.delete(id);
+    if (!taskType.affected) {
+      throw new NotFoundException("TaskType Not Found")
     }
     return taskType;
-  }
-
-  update(id: number, updateTaskTypeDto: UpdateTaskTypeDto) {
-    const taskType = this.repository.update(id, updateTaskTypeDto)
-    if(!taskType) {
-      throw new NotFoundException('TaskType not found')
-    }
-    return taskType;
-  }
-
-  remove(id: number) {
-   const taskType = this.repository.remove(id)
-   if (!taskType) {
-    throw new NotFoundException('TaskType not found')
-   }
-   return taskType
   }
 }
