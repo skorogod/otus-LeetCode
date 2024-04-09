@@ -18,5 +18,3 @@ export const config: DataSourceOptions = {
   migrations: ["src/database/migrations/*.js"],
   synchronize: true,
 };
-
-export const dataSource = new DataSource(config)

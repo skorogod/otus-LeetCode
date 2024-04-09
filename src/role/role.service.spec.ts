@@ -1,13 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RoleService } from './role.service';
-import { RoleRepository } from './role.repository';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Role } from './entities/role.entity';
 
 describe('RoleService', () => {
   let service: RoleService;
 
+  const mockRepository = {
+    
+  }
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [RoleService, RoleRepository],
+      providers: [
+        RoleService, {
+          provide: getRepositoryToken(Role),
+          useValue: mockRepository
+        }
+      ],
     }).compile();
 
     service = module.get<RoleService>(RoleService);

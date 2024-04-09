@@ -1,85 +1,78 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { LevelController } from './level.controller';
 import { LevelService } from './level.service';
-import { LevelModule } from './level.module';
-import { INestApplication } from '@nestjs/common';
-import { LevelRepository } from './level.repository';
 
 const request = require('supertest')
 
 describe('LevelController', () => {
-  let controller: LevelController;
-  let repository: LevelRepository
-  let app: INestApplication;
+  let levelController: LevelController;
+  let levelService: LevelService;
 
-  const level = {
-    title: "Легкий",
+  const levelMock = {
+    id: 1,
+    title: 'Легкий',
     tasks: []
-  };
+  }
+
+  const levelServiceMock = {
+    create: jest.fn().mockResolvedValueOnce(levelMock),
+    findAll: jest.fn().mockResolvedValueOnce([levelMock]),
+    findOne: jest.fn().mockResolvedValueOnce(levelMock),
+    update: jest.fn().mockResolvedValueOnce(levelMock),
+    remove: jest.fn().mockResolvedValueOnce(levelMock)
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [LevelController],
-      providers: [LevelService, LevelRepository],
+      providers:  [{
+        provide: LevelService,
+        useValue: levelServiceMock
+      }],
     }).compile();
 
-    controller = module.get<LevelController>(LevelController);
-    repository = module.get<LevelRepository>(LevelRepository)
-  });
-
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [LevelModule],
-    }).compile();
-  
-    app = moduleRef.createNestApplication();
-    await app.init();
+    levelService = module.get<LevelService>(LevelService)
+    levelController = module.get<LevelController>(LevelController);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(levelController).toBeDefined();
   });
 
-  test("It should response level list after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/level");
-    expect(response.statusCode).toBe(200);
+  test("It should get all levels", async () => {
+    expect(await levelController.findAll()).toEqual([levelMock])
   });
 
-  test("It should response level Detail, using Id, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/level/0");
-    expect(response.statusCode).toBe(200);
-  });
+  test("it should create new level", async () => {
+    const new_level = {
+      title: 'средний',
+      tasks: []
+    }
+    const result = await levelController.create(new_level as any);
+    expect(levelServiceMock.create).toHaveBeenCalled();
+    expect(result).toEqual(levelMock);
+  }) 
 
-  test("It should send 404 status, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/level/3");
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should find one level', async () => {
+    const result = await levelController.findOne('1')
+    expect(levelServiceMock.findOne).toHaveBeenCalledWith(1)
+    expect(result).toEqual(levelMock)
+  })
 
-  test("It should response body of request, after POST", async () => {
-    const response = await request(app.getHttpServer()).post("/level").send(level);
-    expect(response.statusCode).toBe(201);
-    expect(response.body).toEqual({id: repository.levels.length, ...level});
-  });
+  test("it should update level", async () => {
+    const upd_level =  {
+      title: 'тяжелый',
+    }
 
-  test("It should response body of request, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/level/0").send(level);
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual(repository.levels[0]);
-  });
+    const result = await levelController.update('1', upd_level)
+    expect(levelServiceMock.update).toHaveBeenCalledWith(1, {...upd_level})
+    expect(result).toEqual(levelMock)
+  })
 
-  test("It should send 404 status, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/level/5").send(level);
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should delete level', async () => {
+    const result = await levelController.remove('1')
+    expect(levelServiceMock.remove).toHaveBeenCalledWith(1)
+    expect(result).toEqual(levelMock)
+  })
 
-  test("It should response level object, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/level/0");
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({id: 0, ...level});
-  });
-
-  test("It should send 404 status, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/level/5");
-    expect(response.statusCode).toBe(404);
-  });
 });

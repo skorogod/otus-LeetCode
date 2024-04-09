@@ -1,87 +1,84 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RoleController } from './role.controller';
 import { RoleService } from './role.service';
-import { RoleModule } from './role.module';
-import { INestApplication } from '@nestjs/common';
-import { RoleRepository } from './role.repository';
-import { Repository } from 'typeorm';
-import { Role } from './entities/role.entity';
 
 const request = require('supertest')
 
 describe('RoleController', () => {
-  let controller: RoleController;
-  let repository: Repository<Role>
-  let app: INestApplication;
-  const role = {
-    title: "Пользователь",
-    description: "Пользователь со стандартными правами",
-    rules: [0, 1],
-  };
+  let roleController: RoleController;
+  let roleService: RoleService;
+
+  const roleMock = {
+    id: 1,
+    title: 'Пользователь',
+    description: 'Описание роли',
+    rules: [
+      0, 1
+    ],
+  }
+
+  const roleServiceMock = {
+    create: jest.fn().mockResolvedValueOnce(roleMock),
+    findAll: jest.fn().mockResolvedValueOnce([roleMock]),
+    findOne: jest.fn().mockResolvedValueOnce(roleMock),
+    update: jest.fn().mockResolvedValueOnce(roleMock),
+    remove: jest.fn().mockResolvedValueOnce(roleMock)
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [RoleController],
-      providers: [RoleService, RoleRepository],
+      providers:  [{
+        provide: RoleService,
+        useValue: roleServiceMock
+      }],
     }).compile();
 
-    controller = module.get<RoleController>(RoleController);
-    repository = module.get<Repository<Role>>(Repository<Role>)
-  });
-
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [RoleModule],
-    }).compile();
-  
-    app = moduleRef.createNestApplication();
-    await app.init();
+    roleService = module.get<RoleService>(RoleService)
+    roleController = module.get<RoleController>(RoleController);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(roleController).toBeDefined();
   });
 
-  test("It should response role list after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/role");
-    expect(response.statusCode).toBe(200);
+  test("It should get all roles", async () => {
+    expect(await roleController.findAll()).toEqual([roleMock])
   });
 
-  test("It should response role Detail, using Id, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/role/0");
-    expect(response.statusCode).toBe(200);
-  });
+  test("it should create new role", async () => {
+    const new_role = {
+      title: 'Пользователь',
+      description: 'Описание роли',
+      rules: [
+        0, 1
+      ],
+    }
+    const result = await roleController.create(new_role as any);
+    expect(roleServiceMock.create).toHaveBeenCalled();
+    expect(result).toEqual(roleMock);
+  }) 
 
-  test("It should send 404 status, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/role/3");
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should find one role', async () => {
+    const result = await roleController.findOne('1')
+    expect(roleServiceMock.findOne).toHaveBeenCalledWith(1)
+    expect(result).toEqual(roleMock)
+  })
 
-  test("It should response body of request, after POST", async () => {
-    const response = await request(app.getHttpServer()).post("/role").send(role);
-    expect(response.statusCode).toBe(201);
-    expect(response.body).toEqual({id: repository.roles.length, ...role});
-  });
+  test("it should update role", async () => {
+    const upd_role =  {
+      title: 'Пользователь'
+    }
 
-  test("It should response body of request, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/role/0").send(role);
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({id: 0, ...role});
-  });
+    const result = await roleController.update('1', upd_role)
+    expect(roleServiceMock.update).toHaveBeenCalledWith(1, {...upd_role})
+    expect(result).toEqual(roleMock)
+  })
 
-  test("It should send 404 status, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/role/5").send(role);
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should delete role', async () => {
+    const result = await roleController.remove('1')
+    expect(roleServiceMock.remove).toHaveBeenCalledWith(1)
+    expect(result).toEqual(roleMock)
+  })
 
-  test("It should response role object, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/role/0");
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({id: 0, ...role});
-  });
-
-  test("It should send 404 status, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/role/5");
-    expect(response.statusCode).toBe(404);
-  });
 });

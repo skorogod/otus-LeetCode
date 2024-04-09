@@ -23,7 +23,7 @@ export class RoleController {
   }
 
   @Patch(':id')
-  patch(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
+  update(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
     return this.roleService.update(+id, updateRoleDto);
   }
 

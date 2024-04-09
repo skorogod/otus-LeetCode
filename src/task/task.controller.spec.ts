@@ -1,87 +1,85 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TaskController } from './task.controller';
 import { TaskService } from './task.service';
-import { TaskModule } from './task.module';
-import { INestApplication } from '@nestjs/common';
-import { TaskRepository } from './task.repository';
-
-const request = require('supertest')
 
 describe('TaskController', () => {
-  let controller: TaskController;
-  let repository: TaskRepository
-  let app: INestApplication;
+  let taskController: TaskController;
+  let taskService: TaskService
 
-  const task = {
-    title: "Сортировка массива",
-    description: "Отсортируйте массив [2,4,1,6]",
-    tags: ["Массив", "сортировка"],
-    links: ["testlink.com"],
-  };
+  const taskMock = {
+    id: 1,
+    title: 'Сортировка массива',
+    description: 'Отсортируйте массив [2,4,1,6]',
+    level: { id: 0, title: 'light', tasks: [] },
+    tags: ['Массив', 'сортировка'],
+    links: ['testlink.com'],
+  }
+
+  const taskServiceMock = {
+    create: jest.fn().mockResolvedValueOnce(taskMock),
+    findAll: jest.fn().mockResolvedValueOnce([taskMock]),
+    findOne: jest.fn().mockResolvedValueOnce(taskMock),
+    update: jest.fn().mockResolvedValueOnce(taskMock),
+    remove: jest.fn().mockResolvedValueOnce(taskMock)
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TaskController],
-      providers: [TaskService, TaskRepository],
+      providers: [
+        {
+          provide: TaskService,
+          useValue: taskServiceMock
+        }
+      ],
     }).compile();
 
-    controller = module.get<TaskController>(TaskController);
-    repository = module.get<TaskRepository>(TaskRepository)
-  });
-
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [TaskModule],
-    }).compile();
-  
-    app = moduleRef.createNestApplication();
-    await app.init();
+    taskController = module.get<TaskController>(TaskController);
+    taskService = module.get<TaskService>(TaskService)
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(taskController).toBeDefined();
   });
 
-  test("It should response task list after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/task");
-    expect(response.statusCode).toBe(200);
+  test("It should get all tasks", async () => {
+    expect(await taskController.findAll()).toEqual([taskMock])
   });
 
-  test("It should response task Detail, using Id, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/task/0");
-    expect(response.statusCode).toBe(200);
-  });
+  test("it should create new task", async () => {
+    const new_task = {
+      title: 'Сортировка массива',
+      description: 'Отсортируйте массив [2,4,1,6]',
+      level: 0,
+      taskType: 0,
+      tags: ['Массив', 'сортировка'],
+      links: ['testlink.com'],
+    }
+    const result = await taskController.create(new_task as any);
+    expect(taskServiceMock.create).toHaveBeenCalled();
+    expect(result).toEqual(taskMock);
+  }) 
 
-  test("It should send 404 status, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/task/3");
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should find one task', async () => {
+    const result = await taskController.findOne('1')
+    expect(taskServiceMock.findOne).toHaveBeenCalledWith(1)
+    expect(result).toEqual(taskMock)
+  })
 
-  test("It should response body of request, after POST", async () => {
-    const response = await request(app.getHttpServer()).post("/task").send(task);
-    expect(response.statusCode).toBe(201);
-    expect(response.body).toEqual({id: repository.tasks.length, ...task});
-  });
+  test("it should update task", async () => {
+    const upd_task =  {
+      description: 'upd descr',
+    }
 
-  test("It should response body of request, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/task/0").send(task);
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual(repository.tasks[0]);
-  });
+    const result = await taskController.update('1', upd_task)
+    expect(taskServiceMock.update).toHaveBeenCalledWith(1, {...upd_task})
+    expect(result).toEqual(taskMock)
+  })
 
-  test("It should send 404 status, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/task/5").send(task);
-    expect(response.statusCode).toBe(404);
-  });
-
-  test("It should response task object, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/task/0");
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual(repository.tasks[0]);
-  });
-
-  test("It should send 404 status, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/task/5");
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should delete task', async () => {
+    const result = await taskController.remove('1')
+    expect(taskServiceMock.remove).toHaveBeenCalledWith(1)
+    expect(result).toEqual(taskMock)
+  })
+ 
 });

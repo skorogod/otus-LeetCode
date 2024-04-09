@@ -10,7 +10,7 @@ import { RuleModule } from './rule/rule.module';
 import { RoleModule } from './role/role.module';
 import { TaskTypeModule } from './task-type/task-type.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
+
 
 import { config } from './config/typeorm';
 
@@ -28,9 +28,10 @@ import { config } from './config/typeorm';
   controllers: [AppController],
   providers: [AppService],
 })
+
+
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');
   }
-  constructor(private datasource: DataSource) {}
 }

@@ -1,13 +1,25 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TaskTypeService } from './task-type.service';
 import { TaskTypeRepository } from './task-type.repository';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { TaskType } from './entities/task-type.entity';
 
 describe('TaskTypeService', () => {
   let service: TaskTypeService;
 
+  const mockRepository = {
+
+  }
+  
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [TaskTypeService, TaskTypeRepository],
+      providers: [
+        TaskTypeService,
+        {
+          provide: getRepositoryToken(TaskType),
+          useValue: mockRepository
+        }
+      ],
     }).compile();
 
     service = module.get<TaskTypeService>(TaskTypeService);
