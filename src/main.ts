@@ -3,22 +3,22 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
+import {config as dbConfig} from 'dotenv'
+
+const PORT = process.env.NODE_DOCKER_PORT || 3000
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
+    .setTitle('Leet Code')
     .setDescription('The cats API description')
     .setVersion('1.0')
-    .addTag('cats')
     .build();
   
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
-  // app.useGlobalPipes(new ValidationPipe());
-
-  await app.listen(3000);
+  await app.listen(PORT);
 }
 bootstrap();
