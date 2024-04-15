@@ -12,11 +12,11 @@ import { TaskTypeModule } from './task-type/task-type.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 
-import { config } from './config/typeorm';
+import { dataSourceConfig } from './config/typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(config),
+    TypeOrmModule.forRoot(dataSourceConfig),
     TaskModule, 
     UserModule, 
     CommentModule, 

@@ -5,6 +5,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import {config as dbConfig} from 'dotenv'
 
+dbConfig()
+
 const PORT = process.env.NODE_DOCKER_PORT || 3000
 
 async function bootstrap() {
