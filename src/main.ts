@@ -11,8 +11,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Leet Code')
-    .setDescription('The cats API description')
+    .setTitle('LeetCode API')
+    .setDescription('The LeetCode API description')
     .setVersion('1.0')
     .build();
   

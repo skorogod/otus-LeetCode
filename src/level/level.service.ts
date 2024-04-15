@@ -1,41 +1,48 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
-import { LevelRepository } from './level.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Level } from './entities/level.entity';
 
 @Injectable()
 export class LevelService {
-  constructor(private readonly repository: LevelRepository) { 
-  }
-  create(createLevelDto: CreateLevelDto) {
-    return this.repository.create(createLevelDto)
+  constructor(
+    @InjectRepository(Level)
+    private repository: Repository<Level>
+  ){}
+
+  async create(createLevelDto: CreateLevelDto) {
+    const level = this.repository.create(createLevelDto);
+    return await this.repository.save(level)
   }
 
-  findAll() {
-    return this.repository.findAll()
+  async findAll() {
+    return await this.repository.find();
   }
 
-  findOne(id: number) {
-    const level = this.repository.find(id)
-    if(!level) {
-      throw new NotFoundException('Level not found')
+  async findOne(id: number) {
+    const level = await this.repository.findOneBy({id});
+    if (!level) {
+      throw new NotFoundException('Level Not Found')
+    }
+    return level
+  }
+
+  async update(id: number, updateLevelDto: UpdateLevelDto) {
+    let level = await this.repository.findOneBy({id})
+    if (!level) {
+      throw new NotFoundException('Level Not Found')
+    }
+    level = this.repository.merge(level, updateLevelDto)
+    return await this.repository.save(level);
+  }
+
+  async remove(id: number) {
+    const level = await this.repository.delete(id);
+    if (!level.affected) {
+      throw new NotFoundException("Level Not Found")
     }
     return level;
-  }
-
-  update(id: number, updateLevelDto: UpdateLevelDto) {
-    const level = this.repository.update(id, updateLevelDto)
-    if(!level) {
-      throw new NotFoundException('Level not found')
-    }
-    return level;
-  }
-
-  remove(id: number) {
-   const level = this.repository.remove(id)
-   if (!level) {
-    throw new NotFoundException('Level not found')
-   }
-   return level
   }
 }

@@ -23,7 +23,7 @@ export class LevelController {
   }
 
   @Patch(':id')
-  patch(@Param('id') id: string, @Body() updateLevelDto: UpdateLevelDto) {
+  update(@Param('id') id: string, @Body() updateLevelDto: UpdateLevelDto) {
     return this.levelService.update(+id, updateLevelDto);
   }
 

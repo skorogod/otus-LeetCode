@@ -8,7 +8,7 @@ import {
   } from 'typeorm';
   import { ITask } from 'src/task/interfaces/task.interface';
   import { ILevel } from '../interfaces/level.interface';
-  import { Task } from 'src/task/entities/task.entity';
+  import { Task } from '../../task/entities/task.entity';
   
   @Entity({ name: 'levels' })
   export class Level implements ILevel {

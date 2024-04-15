@@ -8,8 +8,8 @@ import {
   } from 'typeorm';
 import { IRule } from 'src/rule/interfaces/rule.interface';
 import { IRole } from '../interfaces/role.interface';
-import { IUser } from 'src/user/interfaces/user.interface';
-import { User } from 'src/user/entities/user.entity';
+import { IUser } from '../../user/interfaces/user.interface';
+import { User } from '../../user/entities/user.entity';
   
   @Entity({ name: 'roles' })
   export class Role implements IRole {
