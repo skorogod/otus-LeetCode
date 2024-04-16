@@ -6,9 +6,11 @@ import { Rule } from '../rule/entities/rule.entity';
 import { Role } from '../role/entities/role.entity';
 import { TaskType } from '../task-type/entities/task-type.entity';
 import { Comment } from '../comment/entities/comment.entity';
-
-
 import { config as dbconfig} from 'dotenv'
+
+
+const path = require('node:path');
+
 dbconfig()
 
 export const dataSourceConfig: DataSourceOptions = {
@@ -19,6 +21,6 @@ export const dataSourceConfig: DataSourceOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   entities: [User, Task, Comment, Level, Rule, Role, TaskType],
-  migrations: ["src/database/migrations/*.js"],
+  migrations: [path.resolve(path.join(__dirname, "../database/migrations/*.{ts, js}"))],
   synchronize: true,
 };
