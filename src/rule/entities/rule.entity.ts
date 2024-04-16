@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { IRule } from '../interfaces/rule.interface';
+import { IRole } from '../../role/interfaces/role.interface';
+import { Role } from '../../role/entities/role.entity';
 
 @Entity({ name: 'rules' })
 export class Rule implements IRule {
@@ -11,4 +13,9 @@ export class Rule implements IRule {
 
   @Column()
   description: string;
+
+  @ManyToMany(() => Role, (role) => role.rules, {
+    cascade: true
+  })
+  roles: IRole[]
 }
