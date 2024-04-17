@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { ITask } from 'src/task/interfaces/task.interface';
 import { IComment } from '../interfaces/comment.interface';
 import { IUser } from 'src/user/interfaces/user.interface';
@@ -16,9 +16,19 @@ export class Comment implements IComment {
   @Column()
   text: string;
 
-  @ManyToOne(() => Task, (task) => task.comments)
+  @ManyToOne(() => Task, (task) => task.comments, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    eager: true
+  })
+  @JoinColumn({name: 'task_id'})
   task: ITask;
   
-  @ManyToOne(() => User, (user) => user.comments)
+  @ManyToOne(() => User, (user) => user.comments, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    eager: true
+  })
+  @JoinColumn({name: 'user_id'})
   user: IUser;
 }

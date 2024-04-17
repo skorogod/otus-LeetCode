@@ -5,6 +5,7 @@ import {
     OneToMany,
     ManyToMany,
     JoinTable,
+    JoinColumn,
   } from 'typeorm';
 import { IRule } from 'src/rule/interfaces/rule.interface';
 import { IRole } from '../interfaces/role.interface';
@@ -23,8 +24,24 @@ import { Rule } from '../../rule/entities/rule.entity';
     @Column()
     description: string;
   
-    @ManyToMany(() => Rule, (rule) => rule.roles)
-    @JoinTable()
+    @ManyToMany(() => Rule, (rule) => rule.roles, {
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE',
+      eager: true
+    })
+    @JoinTable(
+      {
+        name: 'role_rules',
+        joinColumn: {
+          name: 'rule_id',
+          referencedColumnName: 'id'
+        },
+        inverseJoinColumn: {
+          name: "role_id",
+          referencedColumnName: "id"
+        }
+      }
+    )
     rules: IRule[];
   
     @OneToMany(() => User, (user) => user.role)

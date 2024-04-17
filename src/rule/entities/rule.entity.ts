@@ -15,7 +15,9 @@ export class Rule implements IRule {
   description: string;
 
   @ManyToMany(() => Role, (role) => role.rules, {
-    cascade: true
+    cascade: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   roles: IRole[]
 }
