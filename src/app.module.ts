@@ -11,7 +11,6 @@ import { RoleModule } from './role/role.module';
 import { TaskTypeModule } from './task-type/task-type.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-
 import { dataSourceConfig } from './config/typeorm';
 
 @Module({
