@@ -9,12 +9,27 @@ import { LevelModule } from './level/level.module';
 import { RuleModule } from './rule/rule.module';
 import { RoleModule } from './role/role.module';
 import { TaskTypeModule } from './task-type/task-type.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+
+import { dataSourceConfig } from './config/typeorm';
 
 @Module({
-  imports: [TaskModule, UserModule, CommentModule, LevelModule, RuleModule, RoleModule, TaskTypeModule],
+  imports: [
+    TypeOrmModule.forRoot(dataSourceConfig),
+    TaskModule, 
+    UserModule, 
+    CommentModule, 
+    LevelModule, 
+    RuleModule, 
+    RoleModule, 
+    TaskTypeModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
+
+
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');

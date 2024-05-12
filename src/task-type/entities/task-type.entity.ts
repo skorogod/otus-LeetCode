@@ -1,4 +1,4 @@
-import { Task } from "src/task/entities/task.entity";
+import { Task } from "../../task/entities/task.entity";
 import { ITask } from "src/task/interfaces/task.interface";
 import { ITaskType } from "../interfaces/taskType.interface";
 import { PrimaryGeneratedColumn, OneToMany, Entity } from "typeorm";

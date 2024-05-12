@@ -1,84 +1,78 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { RuleController } from './rule.controller';
 import { RuleService } from './rule.service';
-import { RuleModule } from './rule.module';
-import { INestApplication } from '@nestjs/common';
-import { RuleRepository } from './rule.repository';
 
 const request = require('supertest')
 
 describe('RuleController', () => {
-  let controller: RuleController;
-  let repository: RuleRepository
-  let app: INestApplication;
-  const rule = {
-    title: "Просмотр задач",
-    description: "Пользователь может просматривать информацию о задачах",
-  };
+  let ruleController: RuleController;
+  let ruleService: RuleService;
+
+  const ruleMock =  {
+    id: 1,
+    title: 'Выполнение задач',
+    description: 'Пользователь может выполнять задачи',
+  }
+
+  const ruleServiceMock = {
+    create: jest.fn().mockResolvedValueOnce(ruleMock),
+    findAll: jest.fn().mockResolvedValueOnce([ruleMock]),
+    findOne: jest.fn().mockResolvedValueOnce(ruleMock),
+    update: jest.fn().mockResolvedValueOnce(ruleMock),
+    remove: jest.fn().mockResolvedValueOnce(ruleMock)
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [RuleController],
-      providers: [RuleService, RuleRepository],
+      providers:  [{
+        provide: RuleService,
+        useValue: ruleServiceMock
+      }],
     }).compile();
 
-    controller = module.get<RuleController>(RuleController);
-    repository = module.get<RuleRepository>(RuleRepository)
-  });
-
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [RuleModule],
-    }).compile();
-  
-    app = moduleRef.createNestApplication();
-    await app.init();
+    ruleService = module.get<RuleService>(RuleService)
+    ruleController = module.get<RuleController>(RuleController);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(ruleController).toBeDefined();
   });
 
-  test("It should response rule list after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/rule");
-    expect(response.statusCode).toBe(200);
+  test("It should get all rules", async () => {
+    expect(await ruleController.findAll()).toEqual([ruleMock])
   });
 
-  test("It should response rule Detail, using Id, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/rule/0");
-    expect(response.statusCode).toBe(200);
-  });
+  test("it should create new rule", async () => {
+    const new_rule = {
+      title: 'Выполнение задач',
+      description: 'Пользователь может выполнять задачи',
+    }
+    const result = await ruleController.create(new_rule as any);
+    expect(ruleServiceMock.create).toHaveBeenCalled();
+    expect(result).toEqual(ruleMock);
+  }) 
 
-  test("It should send 404 status, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/rule/3");
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should find one rule', async () => {
+    const result = await ruleController.findOne('1')
+    expect(ruleServiceMock.findOne).toHaveBeenCalledWith(1)
+    expect(result).toEqual(ruleMock)
+  })
 
-  test("It should response body of request, after POST", async () => {
-    const response = await request(app.getHttpServer()).post("/rule").send(rule);
-    expect(response.statusCode).toBe(201);
-    expect(response.body).toEqual({id: repository.rules.length, ...rule});
-  });
+  test("it should update rule", async () => {
+    const upd_rule =  {
+      title: 'администрирование',
+    }
 
-  test("It should response body of request, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/rule/0").send(rule);
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual(repository.rules[0]);
-  });
+    const result = await ruleController.update('1', upd_rule)
+    expect(ruleServiceMock.update).toHaveBeenCalledWith(1, {...upd_rule})
+    expect(result).toEqual(ruleMock)
+  })
 
-  test("It should send 404 status, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/rule/5").send(rule);
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should delete rule', async () => {
+    const result = await ruleController.remove('1')
+    expect(ruleServiceMock.remove).toHaveBeenCalledWith(1)
+    expect(result).toEqual(ruleMock)
+  })
 
-  test("It should response rule object, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/rule/0");
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({id: 0, ...rule});
-  });
-
-  test("It should send 404 status, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/rule/5");
-    expect(response.statusCode).toBe(404);
-  });
 });

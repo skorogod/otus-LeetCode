@@ -5,11 +5,13 @@ import {
     OneToMany,
     ManyToMany,
     JoinTable,
+    JoinColumn,
   } from 'typeorm';
 import { IRule } from 'src/rule/interfaces/rule.interface';
 import { IRole } from '../interfaces/role.interface';
-import { IUser } from 'src/user/interfaces/user.interface';
-import { User } from 'src/user/entities/user.entity';
+import { IUser } from '../../user/interfaces/user.interface';
+import { User } from '../../user/entities/user.entity';
+import { Rule } from '../../rule/entities/rule.entity';
   
   @Entity({ name: 'roles' })
   export class Role implements IRole {
@@ -22,8 +24,24 @@ import { User } from 'src/user/entities/user.entity';
     @Column()
     description: string;
   
-    @ManyToMany(() => Role)
-    @JoinTable()
+    @ManyToMany(() => Rule, (rule) => rule.roles, {
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE',
+      eager: true
+    })
+    @JoinTable(
+      {
+        name: 'role_rules',
+        joinColumn: {
+          name: 'rule_id',
+          referencedColumnName: 'id'
+        },
+        inverseJoinColumn: {
+          name: "role_id",
+          referencedColumnName: "id"
+        }
+      }
+    )
     rules: IRule[];
   
     @OneToMany(() => User, (user) => user.role)

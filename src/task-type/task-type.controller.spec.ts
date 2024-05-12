@@ -1,83 +1,76 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TaskTypeController } from './task-type.controller';
 import { TaskTypeService } from './task-type.service';
-import { TaskTypeModule } from './task-type.module';
-import { INestApplication } from '@nestjs/common';
-import { TaskTypeRepository } from './task-type.repository';
 
 const request = require('supertest')
 
 describe('TaskTypeController', () => {
-  let controller: TaskTypeController;
-  let repository: TaskTypeRepository
-  let app: INestApplication;
-  const taskType = {
-    title: "Сортировка массива",
-  };
+  let taskTypeController: TaskTypeController;
+  let taskTypeService: TaskTypeService;
+
+  const taskTypeMock = {
+    id: 1,
+    title: 'Сортировка массива'
+  }
+
+  const taskTypeServiceMock = {
+    create: jest.fn().mockResolvedValueOnce(taskTypeMock),
+    findAll: jest.fn().mockResolvedValueOnce([taskTypeMock]),
+    findOne: jest.fn().mockResolvedValueOnce(taskTypeMock),
+    update: jest.fn().mockResolvedValueOnce(taskTypeMock),
+    remove: jest.fn().mockResolvedValueOnce(taskTypeMock)
+  }
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TaskTypeController],
-      providers: [TaskTypeService, TaskTypeRepository],
+      providers:  [{
+        provide: TaskTypeService,
+        useValue: taskTypeServiceMock
+      }],
     }).compile();
 
-    controller = module.get<TaskTypeController>(TaskTypeController);
-    repository = module.get<TaskTypeRepository>(TaskTypeRepository)
-  });
-
-  beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [TaskTypeModule],
-    }).compile();
-  
-    app = moduleRef.createNestApplication();
-    await app.init();
+    taskTypeService = module.get<TaskTypeService>(TaskTypeService)
+    taskTypeController = module.get<TaskTypeController>(TaskTypeController);
   });
 
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(taskTypeController).toBeDefined();
   });
 
-  test("It should response taskType list after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/task-type");
-    expect(response.statusCode).toBe(200);
+  test("It should get all taskTypes", async () => {
+    expect(await taskTypeController.findAll()).toEqual([taskTypeMock])
   });
 
-  test("It should response taskType Detail, using Id, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/task-type/0");
-    expect(response.statusCode).toBe(200);
-  });
+  test("it should create new taskType", async () => {
+    const new_taskType = {
+      'title': 'функции'
+    }
+    const result = await taskTypeController.create(new_taskType as any);
+    expect(taskTypeServiceMock.create).toHaveBeenCalled();
+    expect(result).toEqual(taskTypeMock);
+  }) 
 
-  test("It should send 404 status, after GET", async () => {
-    const response = await request(app.getHttpServer()).get("/task-type/3");
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should find one taskType', async () => {
+    const result = await taskTypeController.findOne('1')
+    expect(taskTypeServiceMock.findOne).toHaveBeenCalledWith(1)
+    expect(result).toEqual(taskTypeMock)
+  })
 
-  test("It should response body of request, after POST", async () => {
-    const response = await request(app.getHttpServer()).post("/task-type").send(taskType);
-    expect(response.statusCode).toBe(201);
-    expect(response.body).toEqual({id: repository.taskTypes.length, ...taskType});
-  });
+  test("it should update taskType", async () => {
+    const upd_taskType =  {
+      title: 'title',
+    }
 
-  test("It should response body of request, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/task-type/0").send(taskType);
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual(repository.taskTypes[0]);
-  });
+    const result = await taskTypeController.update('1', upd_taskType)
+    expect(taskTypeServiceMock.update).toHaveBeenCalledWith(1, {...upd_taskType})
+    expect(result).toEqual(taskTypeMock)
+  })
 
-  test("It should send 404 status, after PATCH", async () => {
-    const response = await request(app.getHttpServer()).patch("/task-type/5").send(taskType);
-    expect(response.statusCode).toBe(404);
-  });
+  test('it should delete taskType', async () => {
+    const result = await taskTypeController.remove('1')
+    expect(taskTypeServiceMock.remove).toHaveBeenCalledWith(1)
+    expect(result).toEqual(taskTypeMock)
+  })
 
-  test("It should response taskType object, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/task-type/0");
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({id: 0, ...taskType});
-  });
-
-  test("It should send 404 status, after DELETE", async () => {
-    const response = await request(app.getHttpServer()).delete("/task-type/5");
-    expect(response.statusCode).toBe(404);
-  });
 });

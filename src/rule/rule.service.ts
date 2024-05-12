@@ -1,41 +1,48 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRuleDto } from './dto/create-rule.dto';
 import { UpdateRuleDto } from './dto/update-rule.dto';
-import { RuleRepository } from './rule.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Rule } from './entities/rule.entity';
 
 @Injectable()
 export class RuleService {
-  constructor(private readonly repository: RuleRepository) { 
-  }
-  create(createRuleDto: CreateRuleDto) {
-    return this.repository.create(createRuleDto)
+  constructor(
+    @InjectRepository(Rule)
+    private repository: Repository<Rule>
+  ){}
+
+  async create(createRuleDto: CreateRuleDto) {
+    const rule = this.repository.create(createRuleDto);
+    return await this.repository.save(rule)
   }
 
-  findAll() {
-    return this.repository.findAll()
+  async findAll() {
+    return await this.repository.find();
   }
 
-  findOne(id: number) {
-    const rule = this.repository.find(id)
-    if(!rule) {
-      throw new NotFoundException('Rule not found')
+  async findOne(id: number) {
+    const rule = await this.repository.findOneBy({id});
+    if (!rule) {
+      throw new NotFoundException('Rule Not Found')
+    }
+    return rule
+  }
+
+  async update(id: number, updateRuleDto: UpdateRuleDto) {
+    let rule = await this.repository.findOneBy({id})
+    if (!rule) {
+      throw new NotFoundException('Rule Not Found')
+    }
+    rule = this.repository.merge(rule, updateRuleDto)
+    return await this.repository.save(rule);
+  }
+
+  async remove(id: number) {
+    const rule = await this.repository.delete(id);
+    if (!rule.affected) {
+      throw new NotFoundException("Rule Not Found")
     }
     return rule;
-  }
-
-  update(id: number, updateRuleDto: UpdateRuleDto) {
-    const rule = this.repository.update(id, updateRuleDto)
-    if(!rule) {
-      throw new NotFoundException('Rule not found')
-    }
-    return rule;
-  }
-
-  remove(id: number) {
-   const rule = this.repository.remove(id)
-   if (!rule) {
-    throw new NotFoundException('Rule not found')
-   }
-   return rule
   }
 }

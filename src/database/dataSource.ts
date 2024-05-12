@@ -1,15 +1,5 @@
 import { DataSource } from 'typeorm';
+import {config as dbconfig} from 'dotenv'
+import { dataSourceConfig } from '../config/typeorm';
 
-export const dataSource = new DataSource({
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: 'qwertyvbnm',
-  database: 'LeetCode',
-  entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  logging: true,
-  synchronize: true,
-  migrations: ['src/db/migrations/*.ts'],
-  migrationsTableName: 'migrations',
-});
+export const dataSource = new DataSource(dataSourceConfig);
