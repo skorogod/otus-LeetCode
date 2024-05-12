@@ -16,11 +16,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         })
     }
 
-    async validate(user: Pick<IUser, 'id' | 'email' | 'username'>) {
+    async validate(user: Pick<IUser, 'id' | 'username'>) {
         return {
             id: user.id, 
             username: user.username,
-            email: user.email
         }
     }
 }
