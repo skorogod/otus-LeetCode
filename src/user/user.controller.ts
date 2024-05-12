@@ -3,11 +3,13 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guards';
+import { Public } from 'src/decorators';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Public()
   @Post()
   @UsePipes(new ValidationPipe ())
   create(@Body() createUserDto: CreateUserDto) {
@@ -15,7 +17,6 @@ export class UserController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   findAll(@Req() req) {
     console.log(req.user)
     return this.userService.findAll();

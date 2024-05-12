@@ -13,6 +13,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { dataSourceConfig } from './config/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/guards/jwt-auth-guards';
 
 @Module({
   imports: [
@@ -26,7 +28,10 @@ import { AuthModule } from './auth/auth.module';
     TaskTypeModule, AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_GUARD,
+    useClass: JwtAuthGuard
+  }],
 })
 
 
