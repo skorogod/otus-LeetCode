@@ -12,6 +12,7 @@ import { TaskTypeModule } from './task-type/task-type.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { dataSourceConfig } from './config/typeorm';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { dataSourceConfig } from './config/typeorm';
     LevelModule, 
     RuleModule, 
     RoleModule, 
-    TaskTypeModule
+    TaskTypeModule, AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
