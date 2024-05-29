@@ -5,6 +5,8 @@ import {
     OneToMany,
     ManyToOne,
     JoinColumn,
+    ManyToMany,
+    JoinTable,
   } from 'typeorm';
 import { ITask } from '../interfaces/task.interface';
 import { IComment } from 'src/comment/interfaces/comment.interface';
@@ -37,10 +39,10 @@ import { TaskType } from '../../task-type/entities/task-type.entity';
     })
     level: ILevel;
   
-    @Column('text', { array: true })
+    @Column('text', { array: true, nullable: true })
     tags: string[];
   
-    @Column('text', { array: true })
+    @Column('text', { array: true, nullable: true })
     links: string[];
   
     @OneToMany(() => Comment, (comment) => comment.task)
@@ -49,10 +51,15 @@ import { TaskType } from '../../task-type/entities/task-type.entity';
     @ManyToOne(() => User, (user) => user.tasks, {
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE',
-      eager: true
     })
     @JoinColumn({name: 'user_id'})
     user: IUser;
+
+    @ManyToMany(() => User, (user) => user.solvedTasks, {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    })
+    solvedUsers: IUser[]
 
     @ManyToOne( _ => TaskType, (taskType) => taskType.tasks, 
     {

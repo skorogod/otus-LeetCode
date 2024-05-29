@@ -38,6 +38,7 @@ export class UserService {
     const user = this.repository.create({
       email: createUserDto.email,
       username: createUserDto.username,
+      image: '',
       password: await argon2.hash(createUserDto.password)
     });
 
