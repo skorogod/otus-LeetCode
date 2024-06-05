@@ -16,7 +16,7 @@ services:
   app:
     depends_on:
       - postgresdb
-    image: markus777/otus-leet-code
+    image: markus777/otus-leet-code:latest
     restart: unless-stopped
     env_file: ./.env
     ports:
