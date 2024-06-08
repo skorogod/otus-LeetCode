@@ -25,10 +25,10 @@ build:
  stage: build
  script:
  - docker build . -t $CONTAINER_IMAGE:latest
- - docker tag $CONTAINER_IMAGE:latest $CONTAINER_IMAGE:${CI_COMMIT_SHA}
- - docker push $CONTAINER_IMAGE:${CI_COMMIT_SHA}
+ - docker tag $CONTAINER_IMAGE:latest $DOCKER_REGISTRY/$CONTAINER_IMAGE:${CI_COMMIT_SHA}
+ - docker push $DOCKER_REGISTRY/$CONTAINER_IMAGE:${CI_COMMIT_SHA}
 test:
  stage: test
  script:
- - docker pull $CONTAINER_IMAGE:${CI_COMMIT_SHA}
- - docker run $CONTAINER_IMAGE:${ CI_COMMIT_SHA} nginx -t
+ - docker pull $DOCKER_REGISTRY/$CONTAINER_IMAGE:${CI_COMMIT_SHA}
+ - docker run $DOCKER_REGISTRY/$CONTAINER_IMAGE:${CI_COMMIT_SHA}} nginx -t
