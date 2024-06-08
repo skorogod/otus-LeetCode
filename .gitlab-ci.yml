@@ -24,7 +24,7 @@ stages:          # List of stages for jobs, and their order of execution
 build:
  stage: build
  script:
- - docker build .
+ - docker build . -t $CONTAINER_IMAGE:latest
  - docker tag $CONTAINER_IMAGE:latest $CONTAINER_IMAGE:${CI_COMMIT_SHA}
  - docker push $CONTAINER_IMAGE:${CI_COMMIT_SHA}
 test:
