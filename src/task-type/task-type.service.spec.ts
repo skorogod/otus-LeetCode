@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TaskTypeService } from './task-type.service';
-import { TaskTypeRepository } from './task-type.repository';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { TaskType } from './entities/task-type.entity';
 

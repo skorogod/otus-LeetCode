@@ -2,8 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, Validation
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guards';
-import { Public } from 'src/decorators';
+import { Public } from '../../src/decorators';
 
 @Controller('users')
 export class UserController {
@@ -17,8 +16,7 @@ export class UserController {
   }
 
   @Get()
-  findAll(@Req() req) {
-    console.log(req.user)
+  findAll() {
     return this.userService.findAll();
   }
 

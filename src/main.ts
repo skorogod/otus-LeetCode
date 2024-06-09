@@ -11,6 +11,11 @@ const PORT = process.env.NODE_DOCKER_PORT || 3000
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: [
+      'localhost:5173'
+    ]
+  })
 
   const config = new DocumentBuilder()
     .setTitle('LeetCode API')

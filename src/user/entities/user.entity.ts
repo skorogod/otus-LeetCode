@@ -5,6 +5,8 @@ import {
     OneToMany,
     ManyToOne,
     JoinColumn,
+    ManyToMany,
+    JoinTable,
   } from 'typeorm';
 import { IUser } from '../interfaces/user.interface';
 import { IRole } from 'src/role/interfaces/role.interface';
@@ -26,6 +28,9 @@ import { Task } from '../../task/entities/task.entity';
   
     @Column()
     username: string;
+
+    @Column({nullable:true})
+    image: string;
   
     @ManyToOne(() => Role, (role) => role.users,{
       onDelete: 'RESTRICT',
@@ -40,5 +45,38 @@ import { Task } from '../../task/entities/task.entity';
   
     @OneToMany(() => Task, (task) => task.user)
     tasks: ITask[];
+
+    @Column({
+      default: 0
+    })
+    views: number;
+
+    @Column({
+      default: 0
+    })
+    reputation: number;
+
+    @Column({
+      default: 0
+    })
+    discuss: number;
+
+    @ManyToMany(() => Task, (task) => task.solvedUsers, {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      eager: true
+    })
+    @JoinTable({
+      name: 'solved_tasks',
+        joinColumn: {
+          name: 'task_id',
+          referencedColumnName: 'id'
+        },
+        inverseJoinColumn: {
+          name: 'user_id',
+          referencedColumnName: 'id'
+        }
+    })
+    solvedTasks: ITask[]
   }
   
