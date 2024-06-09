@@ -34,8 +34,14 @@
 image:  node
 
 stages:
+  - prepare
   - build
   - test
+
+prepare:
+  stage: prepare
+  script:
+    - npm i -y
 
 build:
   stage: build
