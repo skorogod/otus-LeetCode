@@ -30,9 +30,6 @@
 #  stage: test
 #  script:
 #  - docker compose up -d
-
-image:  node
-
 stages:
   - test
   - deploy
@@ -41,6 +38,7 @@ test:
   tags:
     - develop
   stage: test
+  image: node
   script:
     - npm i  -y
     - npm  run build
