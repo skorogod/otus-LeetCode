@@ -34,21 +34,11 @@
 image:  node
 
 stages:
-  - prepare
-  - build
   - test
-
-prepare:
-  stage: prepare
-  script:
-    - npm i -y
-
-build:
-  stage: build
-  script:
-    - npm run build
 
 test:
   stage: test
   script:
+    - npm i  -y
+    - npm  run build
     - npm test
