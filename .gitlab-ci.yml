@@ -35,6 +35,7 @@ image:  node
 
 stages:
   - test
+  - deploy
 
 test:
   tags:
@@ -44,3 +45,10 @@ test:
     - npm i  -y
     - npm  run build
     - npm test
+
+deploy:
+  tags:
+    - prod
+  stage: deploy
+  script:
+    - docker compose up -d
