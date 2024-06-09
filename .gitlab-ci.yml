@@ -47,6 +47,8 @@ test:
     - npm test
 
 deploy:
+  only:
+    - main
   tags:
     - prod
   stage: deploy
