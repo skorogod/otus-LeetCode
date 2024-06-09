@@ -51,4 +51,4 @@ deploy:
     - prod
   stage: deploy
   script:
-    - docker compose up 
+    - docker compose up -d
