@@ -40,7 +40,7 @@ stages:
 build:
   stage: build
   script:
-    - npm run build:prod
+    - npm run build
 
 test:
   stage: test
