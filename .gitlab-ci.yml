@@ -37,6 +37,8 @@ stages:
   - test
 
 test:
+  tags:
+    - develop
   stage: test
   script:
     - npm i  -y
