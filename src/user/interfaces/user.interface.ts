@@ -11,5 +11,5 @@ export type IUser = {
     views: number;
     solvedTasks: ITask[];
     discuss: number;
-    reputation :number;
+    reputation: number;
   };

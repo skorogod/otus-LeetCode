@@ -1,4 +1,5 @@
 import { ILevel } from "src/level/interfaces/level.interface";
+import { ITag } from "src/tags/interfaces/tag.interface";
 import { ITaskType } from "src/task-type/interfaces/taskType.interface";
 
 export type ITask = {
@@ -6,7 +7,7 @@ export type ITask = {
     title: string;
     description: string;
     level: ILevel;
-    tags: string[];
+    tags: ITag[];
     links: string[];
     taskType: ITaskType;
   };

@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { MinLength } from "class-validator";
 import { ILevel } from "src/level/interfaces/level.interface";
+import { ITag } from "src/tags/interfaces/tag.interface";
 
 export class CreateTaskDto {
     @ApiProperty()
@@ -14,7 +15,7 @@ export class CreateTaskDto {
     level: ILevel;
 
     @ApiProperty()
-    tags: string[];
+    tags: ITag[];
 
     @ApiProperty()
     links: string[];

@@ -15,6 +15,7 @@ import { dataSourceConfig } from './config/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth-guards';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -25,7 +26,9 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth-guards';
     LevelModule, 
     RuleModule, 
     RoleModule, 
-    TaskTypeModule, AuthModule
+    TaskTypeModule, 
+    AuthModule, 
+    TagsModule
   ],
   controllers: [AppController],
   providers: [AppService, {

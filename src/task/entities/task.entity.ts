@@ -17,6 +17,8 @@ import { Comment } from '../../comment/entities/comment.entity';
 import { User } from '../../user/entities/user.entity';
 import { Level } from '../../level/entities/level.entity';
 import { TaskType } from '../../task-type/entities/task-type.entity';
+import { Tag } from '../../tags/entities/tag.entity';
+import { ITag } from '../../tags/interfaces/tag.interface';
   
   @Entity({ name: 'tasks' })
   export class Task implements ITask {
@@ -39,8 +41,12 @@ import { TaskType } from '../../task-type/entities/task-type.entity';
     })
     level: ILevel;
   
-    @Column('text', { array: true, nullable: true })
-    tags: string[];
+    @ManyToMany(() => Tag, (tag) => tag.tasks, {
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE',
+      eager: true
+    })
+    tags: ITag[]
   
     @Column('text', { array: true, nullable: true })
     links: string[];
