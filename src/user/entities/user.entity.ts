@@ -69,11 +69,11 @@ import { Task } from '../../task/entities/task.entity';
     @JoinTable({
       name: 'solved_tasks',
         joinColumn: {
-          name: 'task_id',
+          name: 'user_id',
           referencedColumnName: 'id'
         },
         inverseJoinColumn: {
-          name: 'user_id',
+          name: 'task_id',
           referencedColumnName: 'id'
         }
     })

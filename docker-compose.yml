@@ -12,11 +12,16 @@ services:
     ports:
       - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
     volumes:
-      - db:/var/lib/postgres
+      - type: volume
+        source: db
+        target: /var/lib/postgres
+    networks:
+      - backend
   app:
     depends_on:
       - postgresdb
-    build: ./
+    build:
+      dockerfile: Dockerfile
     restart: unless-stopped
     env_file: ./.env
     ports:
@@ -29,6 +34,12 @@ services:
       - DB_PORT=$POSTGRESDB_DOCKER_PORT
     stdin_open: true
     tty: true
+    networks:
+      - backend
 
 volumes: 
   db:
+
+networks:
+  backend:
+    driver: bridge
