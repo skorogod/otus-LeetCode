@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim 
+metadata:
+  name: leet-code-persistent-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: yc-network-hdd
+  resources:
+    requests:
+      storage: 4Gi
