@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: leet-code-deployment
+  name: leet-code-db-deployment
   labels:
     app: leet-code-db
 spec:
