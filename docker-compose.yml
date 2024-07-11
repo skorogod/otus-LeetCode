@@ -20,12 +20,11 @@ services:
   app:
     depends_on:
       - postgresdb
-    build:
-      dockerfile: Dockerfile
+    image: markus777/leet-code-back:0.0.1
     restart: unless-stopped
     env_file: ./.env
     ports:
-      - 80:3000
+      - 3000:3000
     environment:
       - DB_HOST=postgresdb
       - DB_USER=$POSTGRESDB_USER
