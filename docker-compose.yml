@@ -12,15 +12,19 @@ services:
     ports:
       - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
     volumes:
-      - db:/var/lib/postgres
+      - type: volume
+        source: db
+        target: /var/lib/postgres
+    networks:
+      - backend
   app:
     depends_on:
       - postgresdb
-    build: ./
+    image: markus777/leet-code-back:0.0.1
     restart: unless-stopped
     env_file: ./.env
     ports:
-      - 80:3000
+      - 3000:3000
     environment:
       - DB_HOST=postgresdb
       - DB_USER=$POSTGRESDB_USER
@@ -29,6 +33,12 @@ services:
       - DB_PORT=$POSTGRESDB_DOCKER_PORT
     stdin_open: true
     tty: true
+    networks:
+      - backend
 
 volumes: 
   db:
+
+networks:
+  backend:
+    driver: bridge

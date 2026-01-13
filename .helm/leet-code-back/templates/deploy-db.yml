@@ -1,0 +1,41 @@
+# db-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leet-code-db-deployment
+  labels:
+    app: leet-code-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leet-code-db
+  template:
+    metadata:
+      labels:
+        app: leet-code-db
+    spec:
+      containers:
+        - name: leet-code-db
+          image: postgres
+          ports:
+            - containerPort: 5432
+              name: "postgres"
+          volumeMounts:
+          - mountPath: "/data"
+            name: leet-code-storage
+          env:
+            - name: POSTGRES_DB
+              value: leet-code
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: qwertyvbnm
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: "1"
+      volumes:
+        - name: leet-code-storage
+          persistentVolumeClaim:
+            claimName: leet-code-persistent-volume-claim

@@ -33,11 +33,11 @@ import { Rule } from '../../rule/entities/rule.entity';
       {
         name: 'role_rules',
         joinColumn: {
-          name: 'rule_id',
+          name: 'role_id',
           referencedColumnName: 'id'
         },
         inverseJoinColumn: {
-          name: "role_id",
+          name: "rule_id",
           referencedColumnName: "id"
         }
       }

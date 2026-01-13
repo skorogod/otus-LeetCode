@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leet-code-back-deployment
+  labels:
+    app: leet-code-back 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leet-code-back
+  template:
+    metadata:
+      labels:
+        app: leet-code-back
+    spec:
+      containers:
+      - name: leet-code-back
+        image: markus777/leet-code-back:0.0.1
+        ports:
+          - containerPort: 3000
+        env:
+            - name: DB_NAME
+              value: leet-code
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASSWORD
+              value: qwertyvbnm
+            - name: DB_HOST
+              value: $(LEET_CODE_DB_SERVICE_PORT_5432_TCP_ADDR)
+            - name: DB_PORT
+              value: $(LEET_CODE_DB_SERVICE_PORT_5432_TCP_PORTT)
